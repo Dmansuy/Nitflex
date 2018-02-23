@@ -1,0 +1,11 @@
+<html>
+<head>
+    <title>Liste des films</title>
+</head>
+<body>
+<h1>Films</h1>
+{% for film in projects %}
+    <p>{{ film.name }}</p>
+{% endfor %}
+</body>
+</html>
