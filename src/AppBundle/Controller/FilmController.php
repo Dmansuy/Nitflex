@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Tests\Controller;
 class FilmController extends Controller
 {
     /**
-     * @Route("/films", name="films_list")
+     * @Route("/films/index", name="films_list")
      */
     public function indexAction()
     {
@@ -36,6 +36,25 @@ class FilmController extends Controller
         $film = $em->getRepository(Film:: class)
             ->find($id);
         return $this->render( 'films/listByCat.html.twig', [
+            'film' => $film
+        ]);*/
+    }
+
+    /**
+     * @Route("/films/{$id}", name="films_details", requirements={"id"="\d+"})
+     */
+    public function showDetailsAction(int $id)
+    {
+        /*return $this->render( 'films/details.html.twig', [
+            'film' => $film
+        ]);*/
+    }
+
+    /**
+     * @Route("/films/{$id}", name="films_search", requirements={"id"="\d+"})
+     */
+    public function searchFilmAction(int $id){
+        /*return $this->render( 'films/search.html.twig', [
             'film' => $film
         ]);*/
     }

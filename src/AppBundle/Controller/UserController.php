@@ -14,23 +14,32 @@ use Symfony\Component\HttpKernel\Tests\Controller;
 
 class UserController extends Controller
 {
+
     /**
-     * @Route("/users", name="users_param")
+     * @Route("/users/signUp", name="users_sign_up")
+     */
+    public function signUpAction(){
+        /*return $this->render('films/signUp.html.twig', [
+                    'user' => $user
+                ]);*/
+    }
+    /**
+     * @Route("/users/parameter", name="users_param")
      */
     public function showParamUserAction()
     {
         /*return $this->render('user/parameter.html.twig', [
-            'film' => $user
+            'user' => $user
         ]);*/
     }
 
     /**
-     * @Route("/users", name="user_preferences")
+     * @Route("/users/preferences", name="users_preferences")
      */
     public function showPreferenceUserAction()
     {
         /*return $this->render('films/preferences.html.twig', [
-            'film' => $user
+            'user' => $user
         ]);*/
     }
 }
