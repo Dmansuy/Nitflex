@@ -9,7 +9,20 @@
 namespace AppBundle\Controller;
 
 
-class FilmController
-{
+use Symfony\Component\HttpKernel\Tests\Controller;
 
+class FilmController extends Controller
+{
+    /**
+     * @Route("/projects/{id}", name="project_view", requirements={"id"="\d+"})
+     */
+    public function listMoviesByCatAction(int $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $project = $em->getRepository(Project:: class)
+            ->find($id);
+        return $this->render( 'project/view.html.twig', [
+            'project' => $project
+        ]);
+    }
 }

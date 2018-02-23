@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Film
- *
  * @ORM\Table(name="film")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FilmRepository")
  */
@@ -14,7 +13,6 @@ class Film
 {
     /**
      * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -23,21 +21,18 @@ class Film
 
     /**
      * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="year", type="datetime")
      */
     private $year;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
@@ -45,7 +40,6 @@ class Film
 
     /**
      * Get id
-     *
      * @return int
      */
     public function getId()
@@ -55,9 +49,7 @@ class Film
 
     /**
      * Set title
-     *
      * @param string $title
-     *
      * @return Film
      */
     public function setTitle($title)
@@ -69,7 +61,6 @@ class Film
 
     /**
      * Get title
-     *
      * @return string
      */
     public function getTitle()
@@ -79,9 +70,7 @@ class Film
 
     /**
      * Set year
-     *
      * @param \DateTime $year
-     *
      * @return Film
      */
     public function setYear($year)
@@ -93,7 +82,6 @@ class Film
 
     /**
      * Get year
-     *
      * @return \DateTime
      */
     public function getYear()
@@ -103,9 +91,7 @@ class Film
 
     /**
      * Set description
-     *
      * @param string $description
-     *
      * @return Film
      */
     public function setDescription($description)
@@ -117,7 +103,6 @@ class Film
 
     /**
      * Get description
-     *
      * @return string
      */
     public function getDescription()
