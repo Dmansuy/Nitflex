@@ -69,6 +69,21 @@ class Category
     }
 
     /**
+     * @param mixed $film
+     */
+    public function setFilm($film)
+    {
+        $this->film = $film;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFilm()
+    {
+        return $this->film;
+    }
+    /**
      * Constructor
      */
     public function __construct()
