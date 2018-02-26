@@ -19,3 +19,4 @@
 .idea/workspace.xml
 .docker
 docker-compose.yml
+/app/config/parameters.yml

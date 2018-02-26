@@ -37,6 +37,11 @@ class Film
      */
     private $description;
 
+    /**
+     * @var string
+     * @ORM\Column(name="affiche", type="string", length=255)
+     */
+    private $affiche;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="film")
@@ -138,5 +143,29 @@ class Film
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set affiche
+     *
+     * @param string $affiche
+     *
+     * @return Film
+     */
+    public function setAffiche($affiche)
+    {
+        $this->affiche = $affiche;
+
+        return $this;
+    }
+
+    /**
+     * Get affiche
+     *
+     * @return string
+     */
+    public function getAffiche()
+    {
+        return $this->affiche;
     }
 }
