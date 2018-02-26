@@ -24,7 +24,7 @@
                 <td>{{ film.category.nameCategory }}</td>
                 <td>{{ film.description }}</td>
                 <td><a href="{{ path('admin_films_edit')}}">Modifier</a></td>
-                <td><a href="">Supprimer</a></td>
+                <td><a href="{{ path('admin_films_delete',{'id': film.id}) }}">Supprimer</a></td>
             </tr>
             </tbody>
             {% endfor %}

@@ -12,7 +12,7 @@
         <tr>
             <td><a href="{{ path('admin_categories_show',{'id': category.id}) }}">{{ category.nameCategory }}</a></td>
             <td><a href="{{ path('admin_categories_edit')}}">Modifier</a></td>
-            <td><a href="">Supprimer</a></td>
+            <td><a href="{{ path('admin_categories_delete',{'id': category.id}) }}">Supprimer</a></td>
         </tr>
         </tbody>
         {% endfor %}
