@@ -6,7 +6,7 @@
 <h1>Films</h1>
 {% for film in film %}
     <h2>{{ film.title }}</h2>
-    <a href="{{ path('films_details', {'id' : film.id}) }}"><img width="300" src="{{  film.affiche }}"></a>
+    <a href="{{ path('films_details', {'id' : film.id}) }}"><img width="300" src="{{asset('public/uploads/affiches/'~film.affiche)}}"></a>
 {% endfor %}
 </body>
 </html>

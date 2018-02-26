@@ -6,14 +6,18 @@ use AppBundle\Entity\Film;
 use AppBundle\Form\FilmType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Manager\FilmManager;
+
 
 class AdminFilmController extends Controller
 {
     /**
      * @Route("/Admin/films", name="admin_films")
      * @param  FilmManager $FilmManager
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexFilm(FilmManager $FilmManager)
    {
@@ -24,7 +28,10 @@ class AdminFilmController extends Controller
     }
     /**
      * @Route("/Admin/films/show/{id}", name="admin_films_show")
-     * @param  FilmManager $FilmManager
+     *
+     * @param FilmManager $FilmManager
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showFilm(FilmManager $FilmManager, $id)
     {
@@ -46,7 +53,9 @@ class AdminFilmController extends Controller
 
     /**
      * @Route("/Admin/films/new", name="admin_films_new")
-    */
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
 
     public function newFilm(Request $request)
     {
@@ -55,6 +64,15 @@ class AdminFilmController extends Controller
         $form->handleRequest( $request );
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $file */
+            $file = $film->getAffiche();
+            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            // moves the file to the directory where brochures are stored
+            $file->move(
+                $this->getParameter('affiches_directory'),
+                $fileName
+            );
+            $film->setAffiche($fileName);
             $film = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $em->persist( $film );
@@ -67,9 +85,20 @@ class AdminFilmController extends Controller
             'form' => $form->createView()
             ]);
     }
+
+    /**
+     * @return string
+     */
+    private function generateUniqueFileName()
+    {
+        return md5(uniqid());
+    }
+
     /**
      * @Route("/Admin/films/delete/{id}", name="admin_films_delete")
-     * @param  FilmManager $FilmManager
+     * @param FilmManager $CategoryFilm
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteCategory (FilmManager $CategoryFilm, $id){
         $film = $CategoryFilm->getFilm($id);

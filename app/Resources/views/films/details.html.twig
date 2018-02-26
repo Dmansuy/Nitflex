@@ -1,6 +1,6 @@
 <a href="{{ path('films_list') }}">Retour aux films</a>
 <h1>{{ film.title }}</h1>
-<img src="{{ film.affiche }}" width="300">
+<img src="{{asset('public/uploads/affiches/'~film.affiche)}}" width="300">
 <p>Genre : {{ film.category.nameCategory }}</p>
 <p>{{ film.description }}</p>
 <p>Date de sortie : {{ film.year.date }}</p>
