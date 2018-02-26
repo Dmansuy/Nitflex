@@ -4,6 +4,7 @@ namespace AppBundle\Manager;
 use AppBundle\Entity\Film;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManagerInterface;
+
 class FilmManager extends Controller
 {
 

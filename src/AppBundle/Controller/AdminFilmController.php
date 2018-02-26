@@ -71,10 +71,10 @@ class AdminFilmController extends Controller
      * @Route("/Admin/films/delete/{id}", name="admin_films_delete")
      * @param  FilmManager $FilmManager
      */
-    public function deleteCategory (FilmManager $CategoryFilm, $id){
-        $film = $CategoryFilm->getFilm($id);
+    public function deleteCategory (FilmManager $FilmManager, $id){
+        $film = $FilmManager->getFilm($id);
         $this->generateUrl( 'admin_films_delete',['id' => $film->getId()]);
-        $CategoryFilm->deleteFilm($film);
+        $FilmManager->deleteFilm($film);
         return $this->redirectToRoute( 'admin_films');
     }
 
