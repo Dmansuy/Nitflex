@@ -3,20 +3,24 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Admin{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         <header>
-            <nav>
-                <ul>
-                    <li><a href="{{ path('admin_films')}}">Films<a></li>
-                    <li><a href="{{ path('admin_categories')}}">Categories<a></li>
-                    <li><a href="">User<a></li>
+            <nav class="navbar navbar-default">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('admin_films')}}">Films</a></li>
+                    <li><a href="{{ path('admin_categories')}}">Categories</a></li>
+                    <li><a href="">User</a></li>
                 </ul>
             </nav>
         </header>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div class="container">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
+        </div>
     </body>
 </html>
