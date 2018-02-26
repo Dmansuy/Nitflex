@@ -17,3 +17,4 @@
 /web/bundles/
 .idea/Nitflex.iml
 .idea/workspace.xml
+/app/config/parameters.yml

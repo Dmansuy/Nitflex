@@ -3,5 +3,30 @@
 <h1>Films</h1>
 <a href="{{ path('admin_films_new')}}">Nouveau film<a>
 
-
+        <table>
+            <thead>
+                <th>Titre</th>
+                <th>Année</th>
+                <th>Descriptif</th>
+                <th>Catégorie</th>
+                <th colspan="2"></th>
+            </thead>
+            <tbody>
+            {{ dump(films) }}
+             {% for film in films %}
+            <tr>
+                <td>
+                    <a href="{{ path('admin_films_show',{'id': film.id}) }}">
+                    {{ film.title }}
+                    </a>
+                </td>
+                <td>{{ film.year.date }}</td>
+                <td>{{ film.category.nameCategory }}</td>
+                <td>{{ film.description }}</td>
+                <td><a href="{{ path('admin_films_edit')}}">Modifier</a></td>
+                <td><a href="">Supprimer</a></td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
 {% endblock %}
