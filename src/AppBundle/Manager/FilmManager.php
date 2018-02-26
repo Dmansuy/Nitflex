@@ -26,4 +26,9 @@ class FilmManager extends Controller
     {
         return $this->em->getRepository(Film::class)->find($id);
     }
+
+    public function deleteFilm($film){
+        $this->em->remove($film);
+        $this->em->flush();
+    }
 }
