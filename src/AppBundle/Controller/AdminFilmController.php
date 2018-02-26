@@ -2,28 +2,34 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Film;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use AppBundle\Manager\FilmManager;
 class AdminFilmController extends Controller
 {
     /**
      * @Route("/Admin/films", name="admin_films")
+     * @param  FilmManager $FilmManager
      */
-    public function indexFilm(Request $request)
-    {
+    public function indexFilm(FilmManager $FilmManager)
+   {
+        $lesFilms = $FilmManager->getFilms();
         $this->generateUrl( 'admin_films');
-        return $this->render('admin/film/index.html.twig', [ ]);
+        return $this->render('admin/film/index.html.twig', [
+            'films' => $lesFilms ]);
     }
     /**
-     * @Route("/Admin/films/show", name="admin_films_show")
+     * @Route("/Admin/films/show/{id}", name="admin_films_show")
+     * @param  FilmManager $FilmManager
      */
-    public function showFilm(Request $request)
+    public function showFilm(FilmManager $FilmManager, $id)
     {
-
-        $this->generateUrl( 'admin_films_show');
-        return $this->render('admin/film/show.html.twig', [ ]);
+        $Film = $FilmManager->getFilm($id);
+        $this->generateUrl( 'admin_films_show', ['id' => $Film->getId()]);
+        return $this->render('admin/film/show.html.twig', [
+            'film' => $Film ]);
     }
 
     /**
