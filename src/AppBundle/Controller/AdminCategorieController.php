@@ -13,6 +13,7 @@ class AdminCategorieController extends Controller
     /**
      * @Route("/Admin/categories", name="admin_categories")
      * @param  CategoryManager $CategoryManager
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexCategorie(CategoryManager $CategoryManager)
     {
@@ -23,7 +24,9 @@ class AdminCategorieController extends Controller
     }
     /**
      * @Route("/Admin/categories/show/{id}", name="admin_categories_show")
-     * @param  CategoryManager $CategoryManager
+     * @param CategoryManager $CategoryManager
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showCategorie(CategoryManager $CategoryManager,$id)
     {
@@ -34,8 +37,9 @@ class AdminCategorieController extends Controller
 
     /**
      * @Route("/Admin/categories/edit", name="admin_categories_edit")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-
     public function editCategorie(Request $request)
     {
         $this->generateUrl( 'admin_categories_edit');
@@ -44,8 +48,9 @@ class AdminCategorieController extends Controller
 
     /**
      * @Route("/Admin/categories/new", name="admin_categories_new")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-
     public function newCategorie(Request $request)
     {
         $category = new Category();
@@ -66,7 +71,9 @@ class AdminCategorieController extends Controller
 
     /**
      * @Route("/Admin/categories/delete/{id}", name="admin_categories_delete")
-     * @param  CategoryManager $CategoryManager
+     * @param CategoryManager $CategoryManager
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteCategory (CategoryManager $CategoryManager, $id){
         $category = $CategoryManager->getCategory($id);

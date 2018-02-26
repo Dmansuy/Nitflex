@@ -14,7 +14,7 @@ use AppBundle\Manager\FilmManager;
 class AdminFilmController extends Controller
 {
     /**
-     * @Route("/Admin/films", name="admin_films")
+     * @Route("/admin/films", name="admin_films")
      * @param  FilmManager $FilmManager
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -27,7 +27,7 @@ class AdminFilmController extends Controller
             'films' => $lesFilms ]);
     }
     /**
-     * @Route("/Admin/films/show/{id}", name="admin_films_show")
+     * @Route("/admin/films/show/{id}", name="admin_films_show")
      *
      * @param FilmManager $FilmManager
      * @param $id
@@ -42,7 +42,7 @@ class AdminFilmController extends Controller
     }
 
     /**
-     * @Route("/Admin/films/edit", name="admin_films_edit")
+     * @Route("/admin/films/edit", name="admin_films_edit")
      */
 
     public function editFilm(Request $request)
@@ -52,7 +52,7 @@ class AdminFilmController extends Controller
     }
 
     /**
-     * @Route("/Admin/films/new", name="admin_films_new")
+     * @Route("/admin/films/new", name="admin_films_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */

@@ -25,11 +25,11 @@ class FilmFixture extends Fixture implements DependentFixtureInterface
     {
         $film = new Film();
         $film
-            ->setTitle('Blanche neige et le chasseur')
+            ->setTitle('Le seigneur des anneaux')
             ->setYear(new \DateTime('2000-02-02'))
-            ->setDescription('Dans des temps immémoriaux où la magie, les fées et les nains étaient monnaie courante, naquit un jour l’unique enfant d’un bon roi et de son épouse chérie')
+            ->setDescription('Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.')
             ->setCategory($this->getReference(1))
-            ->setAffiche('http://fr.web.img6.acsta.net/medias/nmedia/18/85/34/52/20089538.jpg')
+            ->setAffiche('8370ecf72ae726258ec40634d778e091.jpeg')
         ;
         $manager->persist($film);
         $manager->flush();
