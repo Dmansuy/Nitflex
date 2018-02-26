@@ -10,52 +10,43 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Film;
+use AppBundle\Manager\FilmManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+
+
+
 
 class FilmController extends Controller
 {
     /**
-     * @Route("/films/index", name="films_list")
+     * @Route("/films", name="films_list")
+     *
+     * @param FilmManager $filmManager
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(FilmManager $filmManager)
     {
-        $em = $this->getDoctrine()->getManager();
-        $projects = $em->getRepository(Film:: class)->findAll();
+        $films = $filmManager->getFilms();
         return $this->render('films/listAll.html.twig', [
-            'projects' => $projects
+            'film' => $films
         ]);
     }
 
     /**
-     * @Route("/films/{id}", name="films_listCat", requirements={"id"="\d+"})
+     * @Route("/films/{id}", name="films_details")
+     *
+     * @param FilmManager $filmManager
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listMoviesByCatAction(int $id)
+    public function showDetailsAction(FilmManager $filmManager, int $id)
     {
-        /*$em = $this->getDoctrine()->getManager();
-        $film = $em->getRepository(Film:: class)
-            ->find($id);
-        return $this->render( 'films/listByCat.html.twig', [
+        $film = $filmManager->getFilm($id);
+        $this->generateUrl('films_details', ['id' => $film->getId()]);
+        return $this->render('films/details.html.twig', [
             'film' => $film
-        ]);*/
-    }
-
-    /**
-     * @Route("/films/{$id}", name="films_details", requirements={"id"="\d+"})
-     */
-    public function showDetailsAction(int $id)
-    {
-        /*return $this->render( 'films/details.html.twig', [
-            'film' => $film
-        ]);*/
-    }
-
-    /**
-     * @Route("/films/{$id}", name="films_search", requirements={"id"="\d+"})
-     */
-    public function searchFilmAction(int $id){
-        /*return $this->render( 'films/search.html.twig', [
-            'film' => $film
-        ]);*/
+        ]);
     }
 }
