@@ -1,6 +1,6 @@
 $('.conteneur-mas').masonry({
-    // set itemSelector so .grid-sizer is not used in layout
-    itemSelector: '.grid-item',
-    // use element for option
-    percentPosition: true
+    horizontalOrder: true,
+    fitWidth: true,
+    itemSelector: '.Unfilm'
 });
+console.log('ygyg');
