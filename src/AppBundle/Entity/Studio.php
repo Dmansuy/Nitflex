@@ -28,10 +28,14 @@ class Studio
      */
     private $name;
 
+    /**
+     *@ORM\OneToMany(targetEntity="AppBundle\Entity\Film", mappedBy="studios")
+     */
+    private $films;
+
 
     /**
      * Get id
-     *
      * @return int
      */
     public function getId()
@@ -41,21 +45,17 @@ class Studio
 
     /**
      * Set name
-     *
      * @param string $name
-     *
      * @return Studio
      */
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 
     /**
      * Get name
-     *
      * @return string
      */
     public function getName()
