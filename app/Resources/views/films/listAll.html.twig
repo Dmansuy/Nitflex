@@ -8,10 +8,10 @@
     {% endif %}
     </h1>
 
-    <div class="row">
+    <div class="conteneur-mas">
     {% for film in film %}
 
-        <div class="col-sm-6 col-md-4">
+        <div class="Unfilm">
             <div class="thumbnail">
 
            <a href="{{ path('films_details', {'id' : film.id}) }}"><img width="300" height="450" src="{{asset('public/uploads/affiches/'~film.affiche)}}"></a>
@@ -19,7 +19,7 @@
                     <h3>{{ film.title }}</h3>
                 </div>
             </div>
-            </div>
+        </div>
 
     {% endfor %}
     </div>
