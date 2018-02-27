@@ -17,7 +17,7 @@
 /web/bundles/
 .idea/Nitflex.iml
 .idea/workspace.xml
-.docker
+/docker/
 docker-compose.yml
 /app/config/parameters.yml
-/web/app_dev.php
+/docker/logs/nginx/symfony_access.log
