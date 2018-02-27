@@ -16,9 +16,15 @@ class StudioFixture extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $studio = new Studio();
-        $studio
-            ->setName('Warner Bros')
-            ;
+        $studioName = ['Exotic Beetle Productions', 'Ice Crown Films', 'Romance', 'Fantasy System Productions',
+            'Primal Enigma Entertainment', 'Firetopia Film Studios', 'Lunarsoft Film Productions'];
+
+        foreach ($studioName as $value) {
+            $studio = new Studio();
+            $studio
+                ->setName($value);
+            $manager->persist($studio);
+            $manager->flush();
+        }
     }
 }
