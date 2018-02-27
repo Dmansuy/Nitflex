@@ -35,22 +35,27 @@ class FilmController extends Controller
         $this->generateUrl('films_list');
         return $this->render('films/listAll.html.twig', [
             'film' => $films,
+            'categorie' => "",
             'listeCategories' => $Categories
         ]);
     }
 
     /**
      * @Route("/films/{id}", name="films_details")
-     *
+     * @param CategoryManager $categoryManager
      * @param FilmManager $filmManager
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showDetailsAction(FilmManager $filmManager, int $id)
+    public function showDetailsAction(FilmManager $filmManager,CategoryManager $categoryManager, int $id)
     {
         $film = $filmManager->getFilm($id);
+
+        $Categories = $categoryManager->getCategories();
         $this->generateUrl('films_details', ['id' => $film->getId()]);
         return $this->render('films/details.html.twig', [
+            'listeCategories' => $Categories,
+            'categorie' => "",
             'film' => $film
         ]);
     }

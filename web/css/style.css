@@ -1,0 +1,27 @@
+body{
+    background: #0f0f0f;
+}
+.navbar-inverse .navbar-nav li a.textRed:hover {
+    color: #710909;
+}
+.red{
+    color: #710909;
+}
+.black{
+    background: #000;
+}
+
+.floatL30{
+    float: left;
+    width: 28%;
+    padding: 1%;
+}
+.floatL70{
+    float: left;
+    width: 68%;
+    padding: 1%;
+}
+
+.clearF{
+    clear: both;
+}
