@@ -112,5 +112,22 @@ class Cast
     {
         return $this->nickname;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFilms()
+    {
+        return $this->films;
+    }
+
+    /**
+     * @param mixed $films
+     */
+    public function setFilms($films)
+    {
+        $this->films = $films;
+        return $this;
+    }
 }
 

@@ -14,17 +14,41 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class StudioFixture extends Fixture
 {
+    /**
+     * @param ObjectManager $manager
+     * @throws
+     */
     public function load(ObjectManager $manager)
     {
-        $studioName = ['Exotic Beetle Productions', 'Ice Crown Films', 'Romance', 'Fantasy System Productions',
-            'Primal Enigma Entertainment', 'Firetopia Film Studios', 'Lunarsoft Film Productions'];
+        $studioName =
+            [
+                [
+                    'studio' => 'Exotic Beetle Productions', 'film' => ''
+                ], [
+                'studio' => 'Ice Crown Films', 'film' => ''
+            ], [
+                'studio' => 'Romance', 'film' => ''
+            ], [
+                'studio' => 'Fantasy System Productions', 'film' => ''
+            ], [
+                'studio' => 'Primal Enigma Entertainment', 'film' => ''
+            ], [
+                'studio' => 'Firetopia Film Studios', 'film' => ''
+            ], [
+                'studio' => 'Lunarsoft Film Productions', 'film' => ''
+            ]
+            ];
 
         foreach ($studioName as $value) {
             $studio = new Studio();
             $studio
-                ->setName($value);
+                ->setName($value{'studio'})
+                ->setFilms($this->getReference($value{'film'}));
             $manager->persist($studio);
-            $manager->flush();
+
+            $this->addReference($value{'film'}, $studio);
         }
+        $manager->flush();
+
     }
 }

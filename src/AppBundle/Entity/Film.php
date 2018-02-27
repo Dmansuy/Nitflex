@@ -168,4 +168,71 @@ class Film
     {
         return $this->affiche;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCasts()
+    {
+        return $this->casts;
+    }
+
+    /**
+     * @param mixed $casts
+     */
+    public function setCasts($casts)
+    {
+        $this->casts = $casts;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStudios()
+    {
+        return $this->studios;
+    }
+
+    /**
+     * @param mixed $studios
+     */
+    public function setStudios($studios)
+    {
+        $this->studios = $studios;
+        return $this;
+    }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->casts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add cast
+     *
+     * @param \AppBundle\Entity\Cast $cast
+     *
+     * @return Film
+     */
+    public function addCast(\AppBundle\Entity\Cast $cast)
+    {
+        $this->casts[] = $cast;
+
+        return $this;
+    }
+
+    /**
+     * Remove cast
+     *
+     * @param \AppBundle\Entity\Cast $cast
+     */
+    public function removeCast(\AppBundle\Entity\Cast $cast)
+    {
+        $this->casts->removeElement($cast);
+    }
 }
