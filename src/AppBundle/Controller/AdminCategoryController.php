@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Manager\CategoryManager;
 use AppBundle\Entity\Category;
-class AdminCategorieController extends Controller
+class AdminCategoryController extends Controller
 {
     /**
      * @Route("/Admin/categories", name="admin_categories")
