@@ -23,32 +23,33 @@ class StudioFixture extends Fixture
         $studioName =
             [
                 [
-                    'studio' => 'Exotic Beetle Productions', 'film' => ''
+                    'studio' => 'Exotic Beetle Productions', 'film' => 'film_3'
                 ], [
-                'studio' => 'Ice Crown Films', 'film' => ''
+                'studio' => 'Ice Crown Films', 'film' => 'film_9'
             ], [
-                'studio' => 'Romance', 'film' => ''
+                'studio' => 'Romance', 'film' => 'film_1'
             ], [
-                'studio' => 'Fantasy System Productions', 'film' => ''
+                'studio' => 'Fantasy System Productions', 'film' => 'film_7'
             ], [
-                'studio' => 'Primal Enigma Entertainment', 'film' => ''
+                'studio' => 'Primal Enigma Entertainment', 'film' => 'film_6'
             ], [
-                'studio' => 'Firetopia Film Studios', 'film' => ''
+                'studio' => 'Firetopia Film Studios', 'film' => 'film_5'
             ], [
-                'studio' => 'Lunarsoft Film Productions', 'film' => ''
+                'studio' => 'Lunarsoft Film Productions', 'film' => 'film_4'
             ]
             ];
 
         foreach ($studioName as $value) {
-            $studio = new Studio();
-            $studio
-                ->setName($value{'studio'})
-                ->setFilms($this->getReference($value{'film'}));
-            $manager->persist($studio);
+            for ($i = 1; $i < 7; $i++) {
+                $studio = new Studio();
+                $studio
+                    ->setName($value{'studio'})
+                    ->setFilms($this->getReference($value{'film'}));
+                $manager->persist($studio);
 
-            $this->addReference($value{'film'}, $studio);
+                $this->addReference($value{'studio_' . $i}, $studio);
+            }
         }
         $manager->flush();
-
     }
 }

@@ -22,22 +22,23 @@ class CastFixture extends Fixture
     {
         $castName = [
             [
-                'firstName' => 'Dwayne', 'lastName' => 'Johnson', 'NickName' => 'The rock', 'film' => '1'
+                'firstName' => 'Dwayne', 'lastName' => 'Johnson', 'NickName' => 'The rock', 'film' => 'film_1'
             ], [
-                'firstName' => 'Patate', 'lastName' => 'Mexico', 'NickName' => 'Patato', 'film' => '2'
+                'firstName' => 'Patate', 'lastName' => 'Mexico', 'NickName' => 'Patato', 'film' => 'film_2'
             ]
         ];
 
         foreach ($castName as $value) {
-            $cast = new Cast();
-            $cast
-                ->setFirstName($value{'firstName'})
-                ->setLastName($value{'lastName'})
-                ->setNickname($value{'NickName'})
-                ->setFilms($this->getReference($value{'film'}));
-            $manager->persist($cast);
-
-            $this->addReference($value{'film'}, $cast);
+            for ($i = 1; $i < 2; $i++) {
+                $cast = new Cast();
+                $cast
+                    ->setFirstName($value{'firstName'})
+                    ->setLastName($value{'lastName'})
+                    ->setNickname($value{'NickName'})
+                    ->setFilms($this->getReference($value{'film'}));
+                $manager->persist($cast);
+                $this->addReference('cast_' . $i, $cast);
+            }
         }
         $manager->flush();
 
