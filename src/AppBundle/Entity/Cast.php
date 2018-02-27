@@ -55,9 +55,7 @@ class Cast
 
     /**
      * Set firstName
-     *
      * @param string $firstName
-     *
      * @return Cast
      */
     public function setFirstName($firstName)
