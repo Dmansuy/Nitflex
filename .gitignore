@@ -15,9 +15,9 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-.idea/Nitflex.iml
-.idea/workspace.xml
+/.idea/*
 /docker/
 docker-compose.yml
 /app/config/parameters.yml
 /docker/logs/nginx/symfony_access.log
+Nitflex.iml
