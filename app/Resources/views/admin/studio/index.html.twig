@@ -1,0 +1,20 @@
+{% extends 'admin/base.html.twig' %}
+{% block body %}
+<h1>studio</h1>
+<a href="{{ path('admin_studios_new')}}">Nouvelle studio<a>
+    <table>
+        <thead>
+        <th>Nom</th>
+        <th colspan="2"></th>
+        </thead>
+        <tbody>
+        {% for studio in studios %}
+        <tr>
+            <td><a href="{{ path('admin_studios_show',{'id': studio.id}) }}">{{ studio.name }}</a></td>
+            <td><a href="{{ path('admin_studios_edit')}}">Modifier</a></td>
+            <td><a href="{{ path('admin_studios_delete',{'id': studio.id}) }}">Supprimer</a></td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}

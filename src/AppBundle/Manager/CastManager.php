@@ -17,7 +17,6 @@ class CastManager extends Controller
 
     public function getCasts()
     {
-        var_dump('coucou');
         return $this->em->getRepository(Cast::class)->findAll();
     }
 
