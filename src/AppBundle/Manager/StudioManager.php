@@ -1,7 +1,6 @@
 <?php
 namespace AppBundle\Manager;
 
-use AppBundle\Entity\Category;
 use AppBundle\Entity\Studio;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManagerInterface;
