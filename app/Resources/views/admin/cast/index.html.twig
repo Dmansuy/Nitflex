@@ -1,0 +1,29 @@
+{% extends 'admin/base.html.twig' %}
+{% block body %}
+<h1>Acteurs</h1>
+<a href="{{ path('admin_casts_new')}}">Nouveau film<a>
+{{ dump(casts) }}
+        <table>
+            <thead>
+                <th>prenom</th>
+                <th>Nom</th>
+                <th>surNom</th>
+                <th colspan="2"></th>
+            </thead>
+            <tbody>
+             {% for cast in casts %}
+            <tr>
+                <td>
+                    <a href="{{ path('admin_casts_show',{'id': cast.id}) }}">
+                    {{ cast.firstName }}
+                    </a>
+                </td>
+                <td>{{ cast.lastName }}</td>
+                <td>{{ cast.nickname }}</td>
+                <td><a href="{{ path('admin_casts_edit')}}">Modifier</a></td>
+                <td><a href="{{ path('admin_casts_delete',{'id': cast.id}) }}">Supprimer</a></td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+{% endblock %}

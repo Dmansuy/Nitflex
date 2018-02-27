@@ -1,35 +1,32 @@
 <?php
 namespace AppBundle\Manager;
 
-use AppBundle\Entity\Film;
+use AppBundle\Entity\Cast;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 
-class FilmManager extends Controller
+class CastManager extends Controller
 {
 
     private $em;
 
     public function __construct(EntityManagerInterface $entityManager)
-
     {
-
         $this->em = $entityManager;
-
     }
 
-    public function getFilms()
+    public function getCasts()
     {
-        return $this->em->getRepository(Film::class)->findAll();
+        return $this->em->getRepository(Cast::class)->findAll();
     }
 
-    public function getFilm($id)
+    public function getCast($id)
     {
-        return $this->em->getRepository(Film::class)->find($id);
+        return $this->em->getRepository(Cast::class)->find($id);
     }
 
-    public function deleteFilm($film){
-        $this->em->remove($film);
+    public function deleteCast($cast){
+        $this->em->remove($cast);
         $this->em->flush();
     }
 }

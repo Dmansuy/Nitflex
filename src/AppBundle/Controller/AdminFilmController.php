@@ -100,10 +100,10 @@ class AdminFilmController extends Controller
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteCategory (FilmManager $CategoryFilm, $id){
-        $film = $CategoryFilm->getFilm($id);
+    public function deleteCategory (FilmManager $FilmManager, $id){
+        $film = $FilmManager->getFilm($id);
         $this->generateUrl( 'admin_films_delete',['id' => $film->getId()]);
-        $CategoryFilm->deleteFilm($film);
+        $FilmManager->deleteFilm($film);
         return $this->redirectToRoute( 'admin_films');
     }
 
