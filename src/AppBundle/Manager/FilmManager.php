@@ -5,6 +5,7 @@ use AppBundle\Entity\Film;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 
+
 class FilmManager extends Controller
 {
 
@@ -26,6 +27,15 @@ class FilmManager extends Controller
     public function getFilm($id)
     {
         return $this->em->getRepository(Film::class)->find($id);
+    }
+
+    public function getFilmByCategory($id)
+    {
+        $query =  $this->em->createQuery('SELECT f
+        FROM AppBundle:Film f
+        WHERE f.category = :id '
+        )->setParameter('id', $id);
+        return $query->getResult();
     }
 
     public function deleteFilm($film){

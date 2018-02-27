@@ -20,13 +20,17 @@ class CategoryFixture extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $category = new Category();
-        $category
-            ->setNameCategory('Action')
-            ;
-        $manager->persist($category);
-        $manager->flush();
+        $genre = ['Action', 'Drama', 'Romance', 'Horreur', 'Comédie'];
+        $i = 1;
+        foreach ($genre as $value) {
+            $category = new Category();
+            $category
+                ->setNameCategory($value);
+            $manager->persist($category);
+            $manager->flush();
 
-        $this->addReference(1, $category);
+            $this->addReference('category-' . $i, $category);
+            $i++;
+        }
     }
 }
