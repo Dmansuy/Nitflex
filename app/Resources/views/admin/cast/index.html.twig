@@ -1,9 +1,8 @@
 {% extends 'admin/base.html.twig' %}
 {% block body %}
 <h1>Acteurs</h1>
-<a href="{{ path('admin_casts_new')}}">Nouveau film<a>
-{{ dump(casts) }}
-        <table>
+<a href="{{ path('admin_casts_new')}}" class="btn btn-primary" >Nouveau Acteur <a>
+        <table class="table table-condensed">
             <thead>
                 <th>prenom</th>
                 <th>Nom</th>

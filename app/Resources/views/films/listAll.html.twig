@@ -1,12 +1,26 @@
-<html>
-<head>
-    <title>Liste des films</title>
-</head>
-<body>
-<h1>Films</h1>
-{% for film in film %}
-    <h2>{{ film.title }}</h2>
-    <a href="{{ path('films_details', {'id' : film.id}) }}"><img width="300" src="{{asset('public/uploads/affiches/'~film.affiche)}}"></a>
-{% endfor %}
-</body>
-</html>
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1 class="red">
+    {% if categorie %}
+       {{ categorie.nameCategory }}
+    {% else %}
+         Films
+    {% endif %}
+    </h1>
+
+    <div class="conteneur-mas">
+    {% for film in film %}
+
+        <div class="Unfilm">
+            <div class="thumbnail">
+
+           <a href="{{ path('films_details', {'id' : film.id}) }}"><img width="300" height="450" src="{{asset('public/uploads/affiches/'~film.affiche)}}"></a>
+                <div class="caption">
+                    <h3>{{ film.title }}</h3>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+    </div>
+{% endblock %}

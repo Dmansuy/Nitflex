@@ -3,15 +3,58 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-            {% block stylesheets %}
-                <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-            {% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/styleL.css') }}">
+       {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+    <header>
+        <nav class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ path('admin_films')}}">Films</a></li>
+                <li><a href="{{ path('admin_categories')}}">Categories</a></li>
+                <li><a href="{{ path('admin_casts')}}">Acteurs</a></li>
+                <li><a href="{{ path('admin_studios')}}">Studio</a></li>
+                <li><a href="{{ path('admin_users')}}">User</a></li>
+            </ul>
+        </nav>
+    </header>
+    <header>
+        <nav class="navbar navbar-inverse">
+            <ul class="nav navbar-nav">
+                <li><a class="textRed" href="{{ path('films_list')}}">Les Films</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle textRed" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+                    <ul class="dropdown-menu black">
+                        {% for uneCat in listeCategories %}
+                        <li><a class="textRed" href="{{ path('la_categorie',{'id': uneCat.id}) }}">
+                            {{ uneCat.nameCategory }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </nav>
+    </header>
         <div class="container">
             {% block body %}{% endblock %}
-            {% block javascripts %}{% endblock %}
-        </div>
+
+            {% block javascripts %}
+                <script src="{{ asset('js/jquery.min.js') }}"></script>
+                <script src="{{ asset('js/bootstrap.js') }}"></script>
+                <script src="{{ asset('js/masonry.js') }}"></script>
+                <script src="{{ asset('js/app.js') }}"></script>
+            {% endblock %}
+       </div>
     </body>
 </html>
