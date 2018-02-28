@@ -58,7 +58,7 @@ class Film
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Studio", inversedBy="films")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $studios;
+    private $studio;
 
     /**
      * Get id
@@ -167,5 +167,60 @@ class Film
     public function getAffiche()
     {
         return $this->affiche;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCasts()
+    {
+        return $this->casts;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStudio()
+    {
+        return $this->studio;
+    }
+
+    /**
+     * @param mixed $studio
+     */
+    public function setStudio($studio)
+    {
+        $this->studio = $studio;
+        return $this;
+    }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->casts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add cast
+     * @param \AppBundle\Entity\Cast $cast
+     * @return Film
+     */
+    public function addCast(\AppBundle\Entity\Cast $cast)
+    {
+        $this->casts[] = $cast;
+
+        return $this;
+    }
+
+    /**
+     * Remove cast
+     * @param \AppBundle\Entity\Cast $cast
+     */
+    public function removeCast(\AppBundle\Entity\Cast $cast)
+    {
+        $this->casts->removeElement($cast);
     }
 }
