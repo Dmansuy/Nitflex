@@ -58,7 +58,7 @@ class Film
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Studio", inversedBy="films")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $studios;
+    private $studio;
 
     /**
      * Get id
@@ -178,28 +178,19 @@ class Film
     }
 
     /**
-     * @param mixed $casts
-     */
-    public function setCasts($casts)
-    {
-        $this->casts = $casts;
-        return $this;
-    }
-
-    /**
      * @return mixed
      */
-    public function getStudios()
+    public function getStudio()
     {
-        return $this->studios;
+        return $this->studio;
     }
 
     /**
-     * @param mixed $studios
+     * @param mixed $studio
      */
-    public function setStudios($studios)
+    public function setStudio($studio)
     {
-        $this->studios = $studios;
+        $this->studio = $studio;
         return $this;
     }
 
@@ -214,9 +205,7 @@ class Film
 
     /**
      * Add cast
-     *
      * @param \AppBundle\Entity\Cast $cast
-     *
      * @return Film
      */
     public function addCast(\AppBundle\Entity\Cast $cast)
@@ -228,7 +217,6 @@ class Film
 
     /**
      * Remove cast
-     *
      * @param \AppBundle\Entity\Cast $cast
      */
     public function removeCast(\AppBundle\Entity\Cast $cast)

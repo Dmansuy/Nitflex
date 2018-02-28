@@ -20,35 +20,32 @@ class StudioFixture extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $studioName =
+        $studioName = [
             [
-                [
-                    'studio' => 'Exotic Beetle Productions', 'film' => 'film_3'
-                ], [
-                'studio' => 'Ice Crown Films', 'film' => 'film_9'
+                'studio' => 'Exotic Beetle Productions'
             ], [
-                'studio' => 'Romance', 'film' => 'film_1'
+                'studio' => 'Ice Crown Films'
             ], [
-                'studio' => 'Fantasy System Productions', 'film' => 'film_7'
+                'studio' => 'Romance'
             ], [
-                'studio' => 'Primal Enigma Entertainment', 'film' => 'film_6'
+                'studio' => 'Fantasy System Productions'
             ], [
-                'studio' => 'Firetopia Film Studios', 'film' => 'film_5'
+                'studio' => 'Primal Enigma Entertainment'
             ], [
-                'studio' => 'Lunarsoft Film Productions', 'film' => 'film_4'
+                'studio' => 'Firetopia Film Studios'
+            ], [
+                'studio' => 'Lunarsoft Film Productions'
             ]
-            ];
-
+        ];
+        $i = 1;
         foreach ($studioName as $value) {
-            for ($i = 1; $i < 7; $i++) {
-                $studio = new Studio();
-                $studio
-                    ->setName($value{'studio'})
-                    ->setFilms($this->getReference($value{'film'}));
-                $manager->persist($studio);
+            $studio = new Studio();
+            $studio
+                ->setName($value{'studio'});
+            $manager->persist($studio);
 
-                $this->addReference($value{'studio_' . $i}, $studio);
-            }
+            $this->addReference('studio_' . $i, $studio);
+            $i++;
         }
         $manager->flush();
     }
