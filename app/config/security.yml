@@ -17,5 +17,8 @@ security:
                 login_path: login
                 check_path: login
                 default_target_path: films_list
+            logout:
+                path: logout
+                target: login
     access_control:
         - { path: ^/films, roles: "ROLE_USER" }

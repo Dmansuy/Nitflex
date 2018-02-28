@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<a href="{{ path('films_list') }}">Retour aux films</a>
-<h1 class="red">{{ film.title }}</h1>
+    <a type="button" class="btn btn-secondary" href="{{ path('films_list') }}">Retour aux films</a>
+    <h1 class="red">{{ film.title }}</h1>
     <div class="floatL30">
-        <img src="{{asset('public/uploads/affiches/'~film.affiche)}}" width="300">
+        <div class="thumbnail">
+            <img src="{{ asset('public/uploads/affiches/'~film.affiche) }}">
+        </div>
     </div>
     <div class="floatL70">
         <p>Genre : {{ film.category.nameCategory }}</p>
@@ -13,7 +15,6 @@
     <br class="clearF">
     <div class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item" src="//www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen="">
-
         </iframe>
     </div>
 {% endblock %}

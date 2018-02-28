@@ -6,9 +6,10 @@ body{
     height: 100vh;
 }
 .center-form{
-    width: 400px;
+    width: 600px;
     position: relative;
-    margin: 200px auto;
+    margin: 0px auto;
+    padding: 50px;
 }
 .input-group{
     margin: 15px 0;
@@ -16,5 +17,10 @@ body{
 .right-btn{
     position: absolute;
     right: 20px;
+    top: 20px;
+}
+.left-btn{
+    position: absolute;
+    left: 20px;
     top: 20px;
 }
