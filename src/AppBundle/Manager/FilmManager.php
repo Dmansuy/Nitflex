@@ -42,4 +42,10 @@ class FilmManager extends Controller
         $this->em->remove($film);
         $this->em->flush();
     }
+
+    public function searchFilm($search)
+    {
+        $this->em->getRepository(Film::class)->searchFilm($search);
+
+    }
 }
