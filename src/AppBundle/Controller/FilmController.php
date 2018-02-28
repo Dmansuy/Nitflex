@@ -10,13 +10,12 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Film;
+use AppBundle\Form\FilmType;
 use AppBundle\Manager\CategoryManager;
 use AppBundle\Manager\FilmManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-
-
+use Symfony\Component\HttpFoundation\Request;
 
 
 class FilmController extends Controller
@@ -50,7 +49,6 @@ class FilmController extends Controller
     public function showDetailsAction(FilmManager $filmManager,CategoryManager $categoryManager, int $id)
     {
         $film = $filmManager->getFilm($id);
-
         $Categories = $categoryManager->getCategories();
         $this->generateUrl('films_details', ['id' => $film->getId()]);
         return $this->render('films/details.html.twig', [
@@ -62,20 +60,39 @@ class FilmController extends Controller
 
     /**
      * @Route("/films/categories/{id}", name="la_categorie")
-     * @param CategoryManager $categoryManager
      * @param FilmManager $filmManager
+     * @param CategoryManager $categoryManager
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
 
     public function FilmByCategory(FilmManager $filmManager,CategoryManager $categoryManager,$id)
     {
         $films = $filmManager->getFilmByCategory($id);
-        $Categories = $categoryManager->getCategories();
-        $Categorie = $categoryManager->getCategory($id);
-        $this->generateUrl('la_categorie',['id' => $Categorie->getId()]);
+        $categories = $categoryManager->getCategories();
+        $categorie = $categoryManager->getCategory($id);
+        $this->generateUrl('la_categorie',['id' => $categorie->getId()]);
         return $this->render('films/listAll.html.twig', [
             'film' => $films,
-            'categorie' => $Categorie,
-            'listeCategories' => $Categories,
+            'categorie' => $categorie,
+            'listeCategories' => $categories,
+        ]);
+    }
+
+    /**
+     * @Route("/films/search", name="search_film")
+     * @param FilmManager $filmManager
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function searchAction(FilmManager $filmManager, Request $request)
+    {
+        $film = $filmManager->getFilms();
+        $form = $this->createForm(FilmType::class, $film);
+        $form->handleRequest($request);
+        $search = $filmManager->searchFilm($form->getData());
+        return $this->render('films/search.html.twig', [
+            'form' => $form
         ]);
     }
 }
