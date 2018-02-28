@@ -29,7 +29,7 @@ class Studio
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Film", mappedBy="studio")
+     *@ORM\OneToMany(targetEntity="AppBundle\Entity\Film", mappedBy="studios")
      */
     private $films;
 
@@ -71,35 +71,5 @@ class Studio
         return $this->films;
     }
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->films = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add film
-     *
-     * @param \AppBundle\Entity\Film $film
-     *
-     * @return Studio
-     */
-    public function addFilm(\AppBundle\Entity\Film $film)
-    {
-        $this->films[] = $film;
-
-        return $this;
-    }
-
-    /**
-     * Remove film
-     *
-     * @param \AppBundle\Entity\Film $film
-     */
-    public function removeFilm(\AppBundle\Entity\Film $film)
-    {
-        $this->films->removeElement($film);
-    }
 }
+
