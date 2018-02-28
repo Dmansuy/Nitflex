@@ -10,7 +10,8 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Film;
-use AppBundle\Form\FilmType;
+use AppBundle\Form\ResearchType;
+use AppBundle\Form\SearchType;
 use AppBundle\Manager\CategoryManager;
 use AppBundle\Manager\FilmManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -40,7 +41,7 @@ class FilmController extends Controller
     }
 
     /**
-     * @Route("/films/{id}", name="films_details")
+     * @Route("/films/details/{id}", name="films_details")
      * @param CategoryManager $categoryManager
      * @param FilmManager $filmManager
      * @param int $id
@@ -66,7 +67,7 @@ class FilmController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
 
-    public function FilmByCategory(FilmManager $filmManager,CategoryManager $categoryManager,$id)
+    public function FilmByCategory(FilmManager $filmManager,CategoryManager $categoryManager, int $id)
     {
         $films = $filmManager->getFilmByCategory($id);
         $categories = $categoryManager->getCategories();
@@ -87,12 +88,16 @@ class FilmController extends Controller
      */
     public function searchAction(FilmManager $filmManager, Request $request)
     {
-        $film = $filmManager->getFilms();
-        $form = $this->createForm(FilmType::class, $film);
+        $films = [];
+        $form = $this->createForm(ResearchType::class, $films);
         $form->handleRequest($request);
-        $search = $filmManager->searchFilm($form->getData());
+        $search = implode($form->getData());
+        print_r($search);
+
+        $films = $filmManager->searchFilms($search);
         return $this->render('films/search.html.twig', [
-            'form' => $form
+            'form' => $form->createView(),
+            'films'=> $films
         ]);
     }
 }
