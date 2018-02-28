@@ -27,10 +27,11 @@ class CategoryFixture extends Fixture
             $category
                 ->setNameCategory($value);
             $manager->persist($category);
-            $manager->flush();
 
             $this->addReference('category-' . $i, $category);
             $i++;
         }
+        $manager->flush();
     }
+
 }

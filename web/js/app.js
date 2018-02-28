@@ -1,6 +1,7 @@
-$('.conteneur-mas').masonry({
-    horizontalOrder: true,
-    fitWidth: true,
-    itemSelector: '.Unfilm'
+$('.conteneur-mas').imagesLoaded( { background: '.item' }, function() {
+    $('.conteneur-mas').masonry({
+        horizontalOrder: true,
+        fitWidth: true,
+        itemSelector: '.Unfilm'
+    });
 });
-console.log('ygyg');

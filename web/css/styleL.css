@@ -1,7 +1,32 @@
+a{
+    text-decoration: none;
+}
+h3{
+    padding: 0;
+    margin: 0;
+}
 .conteneur-mas{
     margin: 0 auto;
 }
 .Unfilm{
     width: 300px;
     margin: 10px;
+}
+
+.btn-list{
+    float: right;
+    font-size: 30px;
+    margin-top: -17px;
+    text-decoration: none;
+    font-family: bold;
+}
+.btn-list:hover{
+    color: #710909;
+}
+hr{
+    background: #710909;
+    border: 1px solid #710909;
+}
+footer{
+    background: #222222;
 }

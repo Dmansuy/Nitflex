@@ -50,6 +50,17 @@ class Film
     private $category;
 
     /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Cast")
+     */
+    private $casts;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Studio", inversedBy="films")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $studios;
+
+    /**
      * Get id
      * @return int
      */
@@ -66,7 +77,6 @@ class Film
     public function setTitle($title)
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -87,7 +97,6 @@ class Film
     public function setYear($year)
     {
         $this->year = $year;
-
         return $this;
     }
 
@@ -108,7 +117,6 @@ class Film
     public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -123,25 +131,96 @@ class Film
 
     /**
      * Set category
-     *
      * @param \AppBundle\Entity\Category $category
-     *
      * @return Film
      */
     public function setCategory($category)
     {
         $this->category = $category;
-
         return $this;
     }
 
     /**
      * Get category
-     *
      * @return \AppBundle\Entity\Category
      */
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set affiche
+     * @param string $affiche
+     * @return Film
+     */
+    public function setAffiche($affiche)
+    {
+        $this->affiche = $affiche;
+        return $this;
+    }
+
+    /**
+     * Get affiche
+     * @return string
+     */
+    public function getAffiche()
+    {
+        return $this->affiche;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCasts()
+    {
+        return $this->casts;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStudios()
+    {
+        return $this->studios;
+    }
+
+    /**
+     * @param mixed $studios
+     */
+    public function setStudios($studios)
+    {
+        $this->studios = $studios;
+        return $this;
+    }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->casts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add cast
+     * @param \AppBundle\Entity\Cast $cast
+     * @return Film
+     */
+    public function addCast(\AppBundle\Entity\Cast $cast)
+    {
+        $this->casts[] = $cast;
+
+        return $this;
+    }
+
+    /**
+     * Remove cast
+     * @param \AppBundle\Entity\Cast $cast
+     */
+    public function removeCast(\AppBundle\Entity\Cast $cast)
+    {
+        $this->casts->removeElement($cast);
     }
 }
