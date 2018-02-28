@@ -13,22 +13,23 @@
 </head>
 <body>
 <div class="background">
-{% if error %}
-    <div>{{ error.messageKey }}</div>
-{% endif %}
-<div class="container">
-    <div class="center-form">
-        <form action="{{ path('login') }}" method="post">
+    {% if error %}
+        <div>{{ error.messageKey }}</div>
+    {% endif %}
+    <div class="container">
+        <div class="center-form">
+            <form action="{{ path('login') }}" method="post">
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1"><i class="fas fa-user"></i></span>
-                    <input type="text" class="form-control" name="_username" value="{{ last_username }}"                                placeholder="Username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" name="_username" value="{{ last_username }}" placeholder="Username" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1"><i class="fas fa-unlock"></i></span>
-                    <input type="text" class="form-control" name="_password" placeholder="Username"                                 aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" name="_password" placeholder="Username"                            aria-describedby="basic-addon1">
                 </div>
                 <button type="submit" class="btn btn-danger">login</button>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 </body>
