@@ -1,27 +1,120 @@
-body{
-    background: #0f0f0f;
-}
-.navbar-inverse .navbar-nav li a.textRed:hover {
-    color: #710909;
-}
-.red{
-    color: #710909;
-}
-.black{
-    background: #000;
+body {
+    background: #333333;
 }
 
-.floatL30{
+.navbar-inverse .navbar-nav li a.textRed:hover {
+    color: #f40612;
+}
+
+.red {
+    color: #f40612;
+}
+
+.black {
+    background: #282828;
+}
+
+ul li a.textRed {
+    color: #9d9d9d;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #282828;
+    color: #f40612;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: #282828;
+    color: #f40612;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #282828;
+    color: #f40612;
+}
+
+h3 {
+    text-align: center;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+}
+
+.btn-default {
+    margin-right: 7px;
+    margin-left: 5px;
+
+}
+
+.btn-secondary {
+    text-decoration: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    color: #9d9d9d;
+    background-color: #222222;
+    margin: 0 10px 0 10px;
+}
+
+.btn:hover, .btn:focus, .btn.focus {
+    color: #f40612;
+}
+
+iframe{
+    margin: 50px;
+}
+
+.container {
+    margin-right: -15px;
+    margin-left: -15px;
+    width: 1500px;
+}
+
+.floatL30 .btn-list {
+    text-decoration: none;
+}
+
+h1 {
+    text-align: center;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26.4px;
+}
+
+hr {
+    align-content: center;
+    width: 1000px;
+
+}
+
+.floatL70 p {
+    color: #f6f6f6;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.floatL30 {
     float: left;
     width: 28%;
     padding: 1%;
 }
-.floatL70{
+
+.floatL70 {
     float: left;
     width: 68%;
     padding: 1%;
 }
 
-.clearF{
+.clearF {
     clear: both;
 }
