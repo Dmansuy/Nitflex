@@ -1,0 +1,20 @@
+body{
+    background: #101010;
+}
+.background{
+    background: url('../public/img/Netflix-Background.png') no-repeat center;
+    height: 100vh;
+}
+.center-form{
+    width: 400px;
+    position: relative;
+    margin: 200px auto;
+}
+.input-group{
+    margin: 15px 0;
+}
+.right-btn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
