@@ -22,6 +22,7 @@ class User implements UserInterface
      */
     private $id;
 
+
     /**
      * @var string
      *
@@ -55,8 +56,12 @@ class User implements UserInterface
      *
      * @ORM\Column(name="birthday", type="datetime")
      */
-    private $birthday;
 
+    private $birthday;
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Film")
+     */
+    private $films;
 
     /**
      * Get id
@@ -219,4 +224,37 @@ class User implements UserInterface
 
         return $this;
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getFilms()
+    {
+        return $this->films;
+    }
+    /**
+     * Add film
+     *
+     * @param \AppBundle\Entity\Film $film
+     *
+     * @return User
+     */
+    public function addFilm(\AppBundle\Entity\Film $film)
+    {
+        $this->films[] = $film;
+
+        return $this;
+    }
+
+    /**
+     * Remove film
+     *
+     * @param \AppBundle\Entity\Film $film
+     */
+    public function removeFilm(\AppBundle\Entity\Film $film)
+    {
+        $this->films->removeElement($film);
+    }
+
 }

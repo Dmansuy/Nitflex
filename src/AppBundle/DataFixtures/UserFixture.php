@@ -16,6 +16,7 @@ class UserFixture extends Fixture
 {
     /**
      * @param ObjectManager $manager
+     * @throws
      */
     public function load(ObjectManager $manager)
     {
@@ -55,6 +56,7 @@ class UserFixture extends Fixture
                     '$2y$10$rca9a5zbBc1qPO.8B3d9Hu1jH7vDiTi17ee7XMvbn5iSmaQ/mGyPm'
             ]
         ];
+        $i = 1;
         foreach ($users as $value) {
             $user = new User();
             $user
@@ -64,6 +66,8 @@ class UserFixture extends Fixture
                 ->setBirthday(new \DateTime($value{'birthday'}))
                 ->setPassword($value{'password'});
             $manager->persist($user);
+            $this->addReference('user_' . $i, $user);
+            $i++;
         }
         $manager->flush();
     }

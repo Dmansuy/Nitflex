@@ -113,13 +113,6 @@ class Cast
         return $this->nickname;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFilms()
-    {
-        return $this->films;
-    }
 
     /**
      * Constructor
@@ -129,6 +122,13 @@ class Cast
         $this->films = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFilms()
+    {
+        return $this->films;
+    }
     /**
      * Add film
      *

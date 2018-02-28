@@ -53,6 +53,10 @@ class Film
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Cast")
      */
     private $casts;
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
+     */
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Studio", inversedBy="films")
@@ -169,13 +173,6 @@ class Film
         return $this->affiche;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCasts()
-    {
-        return $this->casts;
-    }
 
     /**
      * @return mixed
@@ -192,6 +189,14 @@ class Film
     {
         $this->studio = $studio;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCasts()
+    {
+        return $this->casts;
     }
 
 
@@ -222,5 +227,37 @@ class Film
     public function removeCast(\AppBundle\Entity\Cast $cast)
     {
         $this->casts->removeElement($cast);
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getUsers()
+    {
+        return $this->user;
+    }
+
+
+    /**
+     * Add user
+     * @param \AppBundle\Entity\User $user
+     * @return Film
+     */
+    public function addUser(\AppBundle\Entity\User $user)
+    {
+        $this->user[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     * @param \AppBundle\Entity\User $user
+     */
+    public function removeUser(\AppBundle\Entity\User $user)
+    {
+        $this->user->removeElement($user);
     }
 }
