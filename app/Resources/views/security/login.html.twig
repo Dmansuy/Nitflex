@@ -16,6 +16,7 @@
     {% if error %}
         <div>{{ error.messageKey }}</div>
     {% endif %}
+    <a href="#" class="right-btn btn btn-danger">S'inscrire</a>
     <div class="container">
         <div class="center-form">
             <form action="{{ path('login') }}" method="post">
@@ -25,7 +26,7 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1"><i class="fas fa-unlock"></i></span>
-                    <input type="text" class="form-control" name="_password" placeholder="Username"                            aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" name="_password" placeholder="Password"                            aria-describedby="basic-addon1">
                 </div>
                 <button type="submit" class="btn btn-danger">login</button>
             </form>
