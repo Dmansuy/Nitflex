@@ -16,7 +16,11 @@
     {% if error %}
         <div>{{ error.messageKey }}</div>
     {% endif %}
+<<<<<<< HEAD
     <a href="#" class="right-btn btn btn-danger">S'inscrire</a>
+=======
+    <a href="{{ path('sign_up') }}" class="right-btn btn btn-danger">S'inscrire</a>
+>>>>>>> 1595945c6f02c16f0d91db1dee99e0df7d945460
     <div class="container">
         <div class="center-form">
             <form action="{{ path('login') }}" method="post">

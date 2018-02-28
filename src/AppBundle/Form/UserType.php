@@ -1,7 +1,6 @@
 <?php
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Category;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
@@ -19,7 +18,7 @@ class UserType extends AbstractType
         ->add( 'email', TextType:: class)
         ->add( 'password', TextType:: class)
         ->add( 'birthday', DateTimeType:: class)
-        ->add( 'save', SubmitType:: class, ['label' => 'Ajouter un projet'])
+        ->add( 'save', SubmitType:: class, ['label' => 'add user'])
         ;
 
     }

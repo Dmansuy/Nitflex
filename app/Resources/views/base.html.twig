@@ -26,14 +26,15 @@
         <nav class="navbar navbar-inverse">
             <ul class="nav navbar-nav">
                 <li><a class="textRed" href="{{ path('films_list')}}">Les Films</a></li>
+                <li><a class="textRed" href="{{ path('films_list')}}">Ma Liste</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle textRed" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
                     <ul class="dropdown-menu black">
                         {% for uneCat in listeCategories %}
-                        <li><a class="textRed" href="{{ path('la_categorie',{'id': uneCat.id}) }}">
-                            {{ uneCat.nameCategory }}
-                            </a>
-                        </li>
+                            <li><a class="textRed" href="{{ path('la_categorie',{'id': uneCat.id}) }}">
+                                    {{ uneCat.nameCategory }}
+                                </a>
+                            </li>
                         {% endfor %}
                     </ul>
                 </li>
@@ -44,17 +45,46 @@
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
+            <ul class="nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" style="line-height: 31px;" class="dropdown-toggle textRed" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mon Compte <span class="caret"></span></a>
+                    <ul class="dropdown-menu black">
+                        <li><a class="textRed" href="">
+                                Modifier
+                            </a>
+                        </li>
+                        <li><a class="textRed" href="">
+                                Déconnection
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </nav>
     </header>
+
         <div class="container">
             {% block body %}{% endblock %}
 
             {% block javascripts %}
                 <script src="{{ asset('js/jquery.min.js') }}"></script>
                 <script src="{{ asset('js/bootstrap.js') }}"></script>
+                <script src="{{ asset('js/imagesLoaded.js') }}"></script>
                 <script src="{{ asset('js/masonry.js') }}"></script>
                 <script src="{{ asset('js/app.js') }}"></script>
             {% endblock %}
        </div>
-    </body>
+       <footer>
+
+           <br>
+           <br>
+           <br>
+           <br>
+           <br>
+           <br>
+           <br>
+           <br>
+       </footer>
+
+       </body>
 </html>
