@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Manager;
 
 use AppBundle\Entity\Studio;
@@ -26,8 +27,16 @@ class StudioManager extends Controller
         return $this->em->getRepository(Studio::class)->find($id);
     }
 
-    public function deleteStudio($studio){
+    public function deleteStudio($studio)
+    {
         $this->em->remove($studio);
         $this->em->flush();
+    }
+
+    public function addStudio($studio)
+    {
+        $this->em->persist($studio);
+        $this->em->flush();
+        return $studio;
     }
 }

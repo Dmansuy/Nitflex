@@ -15,11 +15,7 @@ class StudioType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType:: class);
-
-        $builder->add('films', EntityType::class, ['class' => Studio::class, 'choice_label' => 'label']);
-
-        $builder
+            ->add('name', TextType:: class)
             ->add('save', SubmitType:: class);
     }
 }
