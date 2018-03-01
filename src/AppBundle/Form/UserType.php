@@ -18,7 +18,7 @@ class UserType extends AbstractType
         ->add( 'email', TextType:: class)
         ->add( 'password', TextType:: class)
         ->add( 'birthday', DateTimeType:: class)
-        ->add( 'save', SubmitType:: class, ['label' => 'add user'])
+        ->add( 'save', SubmitType:: class, ['label' => 'S\'inscrire'])
         ;
 
     }
