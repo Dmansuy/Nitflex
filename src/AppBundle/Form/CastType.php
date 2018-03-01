@@ -17,9 +17,11 @@ class CastType extends AbstractType
         $builder
             ->add('firstName', TextType:: class)
             ->add('lastName', TextType:: class)
-            ->add('nickname', TextType:: class)
-            ->add('save', SubmitType:: class, ['label' => 'Ajouter un projet']);
+            ->add('nickname', TextType:: class);
 
         $builder->add('films', EntityType::class, ['class' => Cast::class, 'choice_label' => 'label']);
+
+        $builder
+            ->add('save', SubmitType:: class);
     }
 }

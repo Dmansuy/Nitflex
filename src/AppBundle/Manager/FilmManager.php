@@ -76,4 +76,10 @@ class FilmManager extends Controller
         $filmRepository = $this->em->getRepository(Film::class);
         return $filmRepository->searchFilms($search);
     }
+
+    public function addFilm($film){
+        $this->em->persist($film);
+        $this->em->flush();
+        return $film;
+    }
 }
