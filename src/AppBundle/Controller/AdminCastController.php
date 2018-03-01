@@ -48,14 +48,8 @@ class AdminCastController extends Controller
     }
 
     /**
-<<<<<<< HEAD
-     * @Route("/Admin/casts/new", name="admin_casts_new")
-     */
-=======
      * @Route("/admin/casts/new", name="admin_casts_new")
     */
->>>>>>> 0eec2f8331878ce055496d6baa8e596bc5b7c268
-
     public function newCast(Request $request, CastManager $castManager)
     {
         $cast = new Cast();
