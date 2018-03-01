@@ -13,43 +13,60 @@ class AdminCastController extends Controller
 {
     /**
      * @Route("/admin/casts", name="admin_casts")
-     * @param  CastManager $CastManager
+     * @param  CastManager $castManager
      */
-    public function indexCast(CastManager $CastManager)
+    public function indexCast(CastManager $castManager)
     {
 
-        $lesCasts = $CastManager->getCasts();
+        $casts = $castManager->getCasts();
 
         $this->generateUrl('admin_casts');
         return $this->render('admin/cast/index.html.twig', [
-            'casts' => $lesCasts]);
+            'casts' => $casts]);
     }
 
     /**
      * @Route("/admin/casts/show/{id}", name="admin_casts_show")
-     * @param  CastManager $CastManager
+     * @param  CastManager $castManager
      */
-    public function showCast(CastManager $CastManager, $id)
+    public function showCast(CastManager $castManager, $id)
     {
-        $Cast = $CastManager->getCast($id);
-        $this->generateUrl('admin_casts_show', ['id' => $Cast->getId()]);
+        $cast = $castManager->getCast($id);
+        $this->generateUrl('admin_casts_show', ['id' => $cast->getId()]);
         return $this->render('admin/cast/show.html.twig', [
-            'cast' => $Cast]);
+            'cast' => $cast]);
     }
 
     /**
-     * @Route("/admin/casts/edit", name="admin_casts_edit")
+     * @Route("/admin/casts/edit/{id}", name="admin_casts_edit", requirements={"cast" = "\d+"})
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-
-    public function editCast(Request $request)
+    public function editCast(Request $request, $id)
     {
-        $this->generateUrl('admin_casts_edit');
-        return $this->render('admin/cast/edit.html.twig', []);
+        $em = $this->getDoctrine()->getManager();
+        $cast = $em->getRepository(Cast::class)->find($id);
+        $form = $this->createForm(CastType::class, $cast);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $cast = $form->getData();
+            $em->persist($cast);+
+            $em->flush();
+
+            return $this->redirectToRoute('admin_casts');
+        }
+
+        $this->generateUrl('admin_casts_edit', [
+            'id' => $cast->getId()
+        ]);
+        return $this->render('admin/cast/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**
      * @Route("/admin/casts/new", name="admin_casts_new")
-    */
+     */
     public function newCast(Request $request, CastManager $castManager)
     {
         $cast = new Cast();
@@ -68,13 +85,13 @@ class AdminCastController extends Controller
 
     /**
      * @Route("/admin/casts/delete/{id}", name="admin_casts_delete")
-     * @param  CastManager $CastManager
+     * @param  CastManager $castManager
      */
-    public function deleteCategory(CastManager $CastManager, $id)
+    public function deleteCategory(CastManager $castManager, $id)
     {
-        $cast = $CastManager->getCast($id);
+        $cast = $castManager->getCast($id);
         $this->generateUrl('admin_casts_delete', ['id' => $cast->getId()]);
-        $CastManager->deleteCast($cast);
+        $castManager->deleteCast($cast);
         return $this->redirectToRoute('admin_casts');
     }
 
