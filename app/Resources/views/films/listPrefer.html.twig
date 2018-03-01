@@ -1,0 +1,16 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ma liste</h1>
+
+    {%  if films == null %}
+    {% for film in films %}
+        {{ dump(film) }}
+    {% endfor %}
+    {% else %}
+     Vous n'avez pas de film dans votre liste
+   {% endif %}
+{% endblock %}
+
+

@@ -49,14 +49,14 @@ class FilmManager extends Controller
      * @param $id
      * @return array
      */
-    /*public function getFilmByCategory($id)
+    public function getFilmByCategory($id)
     {
         $query =  $this->em->createQuery('SELECT f
         FROM AppBundle:Film f
         WHERE f.category = :id '
         )->setParameter('id', $id);
         return $query->getResult();
-    }*/
+    }
 
     /**
      * @param $film
