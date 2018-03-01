@@ -1,12 +1,13 @@
 {% extends 'admin/base.html.twig' %}
 {% block body %}
 <h1>Acteurs</h1>
-<a href="{{ path('admin_casts_new')}}" class="btn btn-primary" >Nouveau Acteur <a>
+<a href="{{ path('admin_casts_new')}}" class="btn btn-primary" >Nouveau Acteur</a>
+    <div class="block-admin">
         <table class="table table-condensed">
             <thead>
                 <th>prenom</th>
                 <th>Nom</th>
-                <th>surNom</th>
+                <th>Alias</th>
                 <th colspan="2"></th>
             </thead>
             <tbody>
@@ -19,10 +20,11 @@
                 </td>
                 <td>{{ cast.lastName }}</td>
                 <td>{{ cast.nickname }}</td>
-                <td><a href="{{ path('admin_casts_edit')}}">Modifier</a></td>
-                <td><a href="{{ path('admin_casts_delete',{'id': cast.id}) }}">Supprimer</a></td>
+                <td><a href="{{ path('admin_casts_edit')}}"><i class="fas fa-edit"></i></a></td>
+                <td><a href="{{ path('admin_casts_delete',{'id': cast.id}) }}"><i class="fas fa-trash-alt"></i></a></td>
             </tr>
             </tbody>
             {% endfor %}
         </table>
+    </div>
 {% endblock %}
