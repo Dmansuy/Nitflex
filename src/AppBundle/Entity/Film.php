@@ -39,6 +39,19 @@ class Film
 
     /**
      * @var string
+     * @ORM\Column(name="age", type="string", length=255)
+     */
+    private $age;
+
+
+    /**
+     * @var string
+     * @ORM\Column(name="time", type="string", length=255)
+     */
+    private $time;
+
+    /**
+     * @var string
      * @ORM\Column(name="affiche", type="string", length=255)
      */
     private $affiche;
@@ -123,7 +136,26 @@ class Film
         $this->description = $description;
         return $this;
     }
-
+    /**
+     * Set time
+     * @param string $time
+     * @return Film
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+        return $this;
+    }
+    /**
+     * Set age
+     * @param string $age
+     * @return Film
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+        return $this;
+    }
     /**
      * Get description
      * @return string
@@ -131,6 +163,21 @@ class Film
     public function getDescription()
     {
         return $this->description;
+    }
+    /**
+     * Get time
+     * @return string
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }   /**
+    * Get age
+    * @return string
+    */
+    public function getAge()
+    {
+        return $this->age;
     }
 
     /**
