@@ -92,7 +92,7 @@ class AdminFilmController extends Controller
     }
 
     /**
-     * @Route("/Admin/films/delete/{id}", name="admin_films_delete")
+     * @Route("/admin/films/delete/{id}", name="admin_films_delete")
      * @param FilmManager $CategoryFilm
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

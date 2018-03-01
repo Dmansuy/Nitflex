@@ -11,7 +11,7 @@ use AppBundle\Entity\Category;
 class AdminCategoryController extends Controller
 {
     /**
-     * @Route("/Admin/categories", name="admin_categories")
+     * @Route("/admin/categories", name="admin_categories")
      * @param  CategoryManager $CategoryManager
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -23,7 +23,7 @@ class AdminCategoryController extends Controller
             'categories' => $lesCategories ]);
     }
     /**
-     * @Route("/Admin/categories/show/{id}", name="admin_categories_show")
+     * @Route("/admin/categories/show/{id}", name="admin_categories_show")
      * @param CategoryManager $CategoryManager
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
@@ -36,7 +36,7 @@ class AdminCategoryController extends Controller
     }
 
     /**
-     * @Route("/Admin/categories/edit", name="admin_categories_edit")
+     * @Route("/admin/categories/edit", name="admin_categories_edit")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -47,7 +47,7 @@ class AdminCategoryController extends Controller
     }
 
     /**
-     * @Route("/Admin/categories/new", name="admin_categories_new")
+     * @Route("/admin/categories/new", name="admin_categories_new")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -70,7 +70,7 @@ class AdminCategoryController extends Controller
     }
 
     /**
-     * @Route("/Admin/categories/delete/{id}", name="admin_categories_delete")
+     * @Route("/admin/categories/delete/{id}", name="admin_categories_delete")
      * @param CategoryManager $CategoryManager
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
