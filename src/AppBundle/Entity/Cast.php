@@ -129,6 +129,7 @@ class Cast
     {
         return $this->films;
     }
+
     /**
      * Add film
      *
