@@ -16,8 +16,6 @@ class StudioType extends AbstractType
     {
         $builder
             ->add('name', TextType:: class)
-            ->add('save', SubmitType:: class, ['label' => 'Ajouter un projet']);
-
-        $builder->add('films', EntityType::class, ['class' => Studio::class, 'choice_label' => 'label']);
+            ->add('save', SubmitType:: class);
     }
 }

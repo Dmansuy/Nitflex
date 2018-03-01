@@ -1,5 +1,12 @@
 {% extends 'admin/base.html.twig' %}
 {% block body %}
-<h1>Nouveau Film</h1>
-    {{ form(form) }}
+    <h1>Nouveau Film</h1>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div>
+        {{ form_label(form.title) }}
+        {{ form_errors(form.title) }}
+        {{ form_widget(form.title) }}
+    </div>
+    {{ form_end(form) }}
 {% endblock %}

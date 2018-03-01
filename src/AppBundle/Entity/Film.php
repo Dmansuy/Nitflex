@@ -136,6 +136,7 @@ class Film
         $this->description = $description;
         return $this;
     }
+
     /**
      * Set time
      * @param string $time
@@ -146,6 +147,7 @@ class Film
         $this->time = $time;
         return $this;
     }
+
     /**
      * Set age
      * @param string $age
@@ -156,6 +158,7 @@ class Film
         $this->age = $age;
         return $this;
     }
+
     /**
      * Get description
      * @return string
@@ -164,6 +167,7 @@ class Film
     {
         return $this->description;
     }
+
     /**
      * Get time
      * @return string
@@ -171,10 +175,12 @@ class Film
     public function getTime()
     {
         return $this->time;
-    }   /**
-    * Get age
-    * @return string
-    */
+    }
+
+    /**
+     * Get age
+     * @return string
+     */
     public function getAge()
     {
         return $this->age;
@@ -275,7 +281,6 @@ class Film
     {
         $this->casts->removeElement($cast);
     }
-
 
 
     /**
