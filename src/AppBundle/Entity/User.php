@@ -63,6 +63,13 @@ class User implements UserInterface
      */
     private $films;
 
+
+    /**
+     * @var
+     * @ORM\Column(name="is_admin", type="boolean")
+     */
+    private $isAdmin;
+
     /**
      * Get id
      *
@@ -174,7 +181,15 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        $roles = ['ROLE_USER'];
+        if($this->isAdmin())
+        {
+            $roles[] = [
+                'ROLE_ADMIN',
+                'ROLE_USER'
+            ];
+        }
+        return $roles;
     }
 
     /**
@@ -255,6 +270,39 @@ class User implements UserInterface
     public function removeFilm(\AppBundle\Entity\Film $film)
     {
         $this->films->removeElement($film);
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->films = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->isAdmin = false;
+    }
+
+    /**
+     * Set isAdmin
+     *
+     * @param boolean $isAdmin
+     *
+     * @return User
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+
+    /**
+     * Get isAdmin
+     *
+     * @return boolean
+     */
+    public function isAdmin()
+    {
+        return $this->isAdmin;
     }
 
 }
