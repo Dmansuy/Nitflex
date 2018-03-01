@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Manager\CategoryManager;
 use AppBundle\Entity\Category;
+
 class AdminCategoryController extends Controller
 {
     /**
@@ -15,35 +16,49 @@ class AdminCategoryController extends Controller
      * @param  CategoryManager $CategoryManager
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexCategorie(CategoryManager $CategoryManager)
+    public function indexCategory(CategoryManager $CategoryManager)
     {
-        $lesCategories = $CategoryManager->getCategories();
-        $this->generateUrl( 'admin_categories');
-        return $this->render('admin/categorie/index.html.twig', [
-            'categories' => $lesCategories ]);
-    }
-    /**
-     * @Route("/admin/categories/show/{id}", name="admin_categories_show")
-     * @param CategoryManager $CategoryManager
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showCategorie(CategoryManager $CategoryManager,$id)
-    {
-        $category = $CategoryManager->getCategory($id);
-        $this->generateUrl( 'admin_categories_show',['id' => $category->getId()]);
-        return $this->render('admin/categorie/show.html.twig', [ ]);
+        $categories = $CategoryManager->getCategories();
+        $this->generateUrl('admin_categories');
+        return $this->render('admin/category/index.html.twig', [
+            'categories' => $categories]);
     }
 
     /**
-     * @Route("/admin/categories/edit", name="admin_categories_edit")
+     * @Route("/admin/categories/show/{id}", name="admin_categories_show")
+     * @param CategoryManager $categoryManager
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showCategory(CategoryManager $categoryManager, $id)
+    {
+        $category = $categoryManager->getCategory($id);
+        $this->generateUrl('admin_categories_show', ['id' => $category->getId()]);
+        return $this->render('admin/category/show.html.twig', []);
+    }
+
+    /**
+     * @Route("/admin/categories/edit/{id}", name="admin_categories_edit", requirements={"category" = "\d+"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editCategorie(Request $request)
+    public function editCategory(Request $request, $id)
     {
-        $this->generateUrl( 'admin_categories_edit');
-        return $this->render('admin/categorie/edit.html.twig', [ ]);
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository(Category::class)->find($id);
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category = $form->getData();
+            $em->persist($category);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_categories');
+        }
+        $this->generateUrl('admin_categories_edit', [
+            'id' => $category->getId()
+        ]);
+        return $this->render('admin/category/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -51,22 +66,23 @@ class AdminCategoryController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newCategorie(Request $request)
+    public
+    function newCategory(Request $request)
     {
         $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category );
-        $form->handleRequest( $request );
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist( $category );
+            $em->persist($category);
             $em->flush();
-            return $this->redirectToRoute( 'admin_categories');
+            return $this->redirectToRoute('admin_categories');
         }
-        $this->generateUrl( 'admin_categories_new');
-        return $this->render('admin/categorie/new.html.twig', [
-            'form' => $form->createView() ]);
+        $this->generateUrl('admin_categories_new');
+        return $this->render('admin/category/new.html.twig', [
+            'form' => $form->createView()]);
     }
 
     /**
@@ -75,11 +91,13 @@ class AdminCategoryController extends Controller
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteCategory (CategoryManager $CategoryManager, $id){
+    public
+    function deleteCategory(CategoryManager $CategoryManager, $id)
+    {
         $category = $CategoryManager->getCategory($id);
-        $this->generateUrl( 'admin_categories_delete',['id' => $category->getId()]);
+        $this->generateUrl('admin_categories_delete', ['id' => $category->getId()]);
         $CategoryManager->deleteCategory($category);
-        return $this->redirectToRoute( 'admin_categories');
+        return $this->redirectToRoute('admin_categories');
     }
 
 }
