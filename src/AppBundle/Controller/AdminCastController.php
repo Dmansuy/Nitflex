@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminCastController extends Controller
 {
     /**
-     * @Route("/Admin/casts", name="admin_casts")
+     * @Route("/admin/casts", name="admin_casts")
      * @param  CastManager $CastManager
      */
     public function indexCast(CastManager $CastManager)
@@ -26,7 +26,7 @@ class AdminCastController extends Controller
             'casts' => $lesCasts ]);
     }
     /**
-     * @Route("/Admin/casts/show/{id}", name="admin_casts_show")
+     * @Route("/admin/casts/show/{id}", name="admin_casts_show")
      * @param  CastManager $CastManager
      */
     public function showCast(CastManager $CastManager, $id)
@@ -38,7 +38,7 @@ class AdminCastController extends Controller
     }
 
     /**
-     * @Route("/Admin/casts/edit", name="admin_casts_edit")
+     * @Route("/admin/casts/edit", name="admin_casts_edit")
      */
 
     public function editCast(Request $request)
@@ -48,7 +48,7 @@ class AdminCastController extends Controller
     }
 
     /**
-     * @Route("/Admin/casts/new", name="admin_casts_new")
+     * @Route("/admin/casts/new", name="admin_casts_new")
     */
 
     public function newCast(Request $request)
@@ -71,7 +71,7 @@ class AdminCastController extends Controller
             ]);
     }
     /**
-     * @Route("/Admin/casts/delete/{id}", name="admin_casts_delete")
+     * @Route("/admin/casts/delete/{id}", name="admin_casts_delete")
      * @param  CastManager $CastManager
      */
     public function deleteCategory (CastManager $CastManager, $id){
