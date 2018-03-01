@@ -22,6 +22,7 @@ class User implements UserInterface
      */
     private $id;
 
+
     /**
      * @var string
      *
@@ -55,8 +56,19 @@ class User implements UserInterface
      *
      * @ORM\Column(name="birthday", type="datetime")
      */
-    private $birthday;
 
+    private $birthday;
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Film")
+     */
+    private $films;
+
+
+    /**
+     * @var
+     * @ORM\Column(name="is_admin", type="boolean")
+     */
+    private $isAdmin;
 
     /**
      * Get id
@@ -165,32 +177,14 @@ class User implements UserInterface
     }
 
     /**
-     * Returns the roles granted to the user.
-     *
-     * <code>
-     * public function getRoles()
-     * {
-     *     return array('ROLE_USER');
-     * }
-     * </code>
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
      * @return (Role|string)[] The user roles
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        return ['ROLE_USER'];
     }
 
     /**
-     * Returns the password used to authenticate the user.
-     *
-     * This should be the encoded password. On authentication, a plain-text
-     * password will be salted, encoded, and then compared to this value.
-     *
      * @return string The password
      */
     public function getPassword()
@@ -220,15 +214,54 @@ class User implements UserInterface
         return $this->email;
     }
 
-    /**
-     * Removes sensitive data from the user.
-     *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
-     */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
     }
-}
 
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getFilms()
+    {
+        return $this->films;
+    }
+    /**
+     * Add film
+     *
+     * @param \AppBundle\Entity\Film $film
+     *
+     * @return User
+     */
+    public function addFilm(\AppBundle\Entity\Film $film)
+    {
+        $this->films[] = $film;
+
+        return $this;
+    }
+
+    /**
+     * Remove film
+     *
+     * @param \AppBundle\Entity\Film $film
+     */
+    public function removeFilm(\AppBundle\Entity\Film $film)
+    {
+        $this->films->removeElement($film);
+    }
+
+}

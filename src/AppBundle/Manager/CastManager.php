@@ -1,9 +1,10 @@
 <?php
+
 namespace AppBundle\Manager;
 
 use AppBundle\Entity\Cast;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CastManager extends Controller
 {
@@ -25,8 +26,16 @@ class CastManager extends Controller
         return $this->em->getRepository(Cast::class)->find($id);
     }
 
-    public function deleteCast($cast){
+    public function deleteCast($cast)
+    {
         $this->em->remove($cast);
         $this->em->flush();
+    }
+
+    public function addCast($cast)
+    {
+        $this->em->persist($cast);
+        $this->em->flush();
+        return $cast;
     }
 }
