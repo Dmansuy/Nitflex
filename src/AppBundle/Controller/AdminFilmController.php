@@ -142,7 +142,7 @@ class AdminFilmController extends Controller
         {
             $film = new Film();
             $film
-                ->setCategory($film)
+                ->setCategory($film[0])
                 ->setStudio($film[1])
                 ->setTitle($film[2])
                 ->setYear($film[3])
