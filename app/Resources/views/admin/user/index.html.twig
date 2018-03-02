@@ -1,7 +1,8 @@
 {% extends 'admin/base.html.twig' %}
 {% block body %}
-<h1>Users</h1>
-<a href="{{ path('admin_users_new')}}" class="btn btn-primary" >Nouveau User <a>
+<h1>Utilisateurs</h1>
+<a href="{{ path('admin_users_new')}}" class="btn btn-primary" >Nouvel utilisateur</a>
+    <div class="block-admin">
         <table class="table table-condensed">
             <thead>
                 <th>prenom</th>
@@ -21,10 +22,11 @@
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.birthday.date }}</td>
-                <td><a href="{{ path('admin_users_edit')}}">Modifier</a></td>
-                <td><a href="{{ path('admin_users_delete',{'id': user.id}) }}">Supprimer</a></td>
+                <td><a href="{{ path('admin_users_edit', {'id': user.id}) }}"><i class="fas fa-edit"></i></a></td>
+                <td><a href="{{ path('admin_users_delete',{'id': user.id}) }}"><i class="fas fa-trash-alt"></i></a></td>
             </tr>
             </tbody>
             {% endfor %}
         </table>
+    </div>
 {% endblock %}

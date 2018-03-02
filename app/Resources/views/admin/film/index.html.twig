@@ -1,8 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 {% block body %}
-    <h1>Films</h1>
-    <a href="{{ path('admin_films_new') }}" class="btn btn-primary">Nouveau film</a>
-    <div class="block-admin">
+<h1>Films</h1>
+<a href="{{ path('admin_films_new')}}" class="btn btn-primary">Nouveau film</a>
+    <a href="{{ path('import_films')}}" class="btn btn-primary">Import</a>
+<div class="block-admin">
         <table class="table table-condensed">
             <thead>
             <th>Titre</th>
