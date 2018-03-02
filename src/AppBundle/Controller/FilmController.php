@@ -104,12 +104,14 @@ class FilmController extends Controller
         $form = $this->createForm(ResearchType::class, $films);
         $form->handleRequest($request);
         $search = implode($form->getData());
+        $userInSession = $this->getUser();
         $films = $filmManager->searchFilms($search);
         return $this->render('films/search.html.twig', [
             'form' => $form->createView(),
             'films'=> $films,
             'categorie' => "",
-            'listCategories' => ""
+            'listCategories' => "",
+            'userInSession' => $userInSession
         ]);
     }
 }
