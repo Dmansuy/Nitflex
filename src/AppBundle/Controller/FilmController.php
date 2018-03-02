@@ -9,9 +9,7 @@
 namespace AppBundle\Controller;
 
 
-use AppBundle\Entity\Film;
 use AppBundle\Form\ResearchType;
-use AppBundle\Form\SearchType;
 use AppBundle\Manager\CategoryManager;
 use AppBundle\Manager\FilmManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -39,7 +37,7 @@ class FilmController extends Controller
         return $this->render('films/listAll.html.twig', [
             'film' => $films,
             'categorie' => "",
-            'listeCategories' => $Categories,
+            'listCategories' => $categories
              'userInSession' => $userInSession
         ]);
     }
@@ -58,7 +56,7 @@ class FilmController extends Controller
         $userInSession = $this->getUser();
         $this->generateUrl('films_details', ['id' => $film->getId()]);
         return $this->render('films/details.html.twig', [
-            'listeCategories' => $Categories,
+            'listCategories' => $categories,
             'categorie' => "",
             'film' => $film,
             'userInSession' => $userInSession
@@ -77,12 +75,12 @@ class FilmController extends Controller
     {
         $films = $filmManager->getFilmByCategory($id);
         $categories = $categoryManager->getCategories();
-        $categorie = $categoryManager->getCategory($id);
-        $this->generateUrl('la_categorie',['id' => $categorie->getId()]);
+        $category = $categoryManager->getCategory($id);
+        $this->generateUrl('la_categorie',['id' => $category->getId()]);
         return $this->render('films/listAll.html.twig', [
             'film' => $films,
-            'categorie' => $categorie,
-            'listeCategories' => $categories,
+            'categorie' => $category,
+            'listCategories' => $categories,
         ]);
     }
 
@@ -95,15 +93,16 @@ class FilmController extends Controller
     public function searchAction(FilmManager $filmManager, Request $request)
     {
         $films = [];
+
         $form = $this->createForm(ResearchType::class, $films);
         $form->handleRequest($request);
         $search = implode($form->getData());
-        print_r($search);
-
         $films = $filmManager->searchFilms($search);
         return $this->render('films/search.html.twig', [
             'form' => $form->createView(),
-            'films'=> $films
+            'films'=> $films,
+            'categorie' => "",
+            'listCategories' => ""
         ]);
     }
 }

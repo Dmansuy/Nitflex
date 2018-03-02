@@ -35,3 +35,4 @@ services:
     #         $someArgument: 'some_value'
 parameters:
     affiches_directory: '%kernel.project_dir%/web/public/uploads/affiches'
+    csv_directory: '%kernel.project_dir%/web/public/uploads/import'

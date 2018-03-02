@@ -54,3 +54,6 @@ td{
 .navbar-inverse .navbar-nav > li > a{
     border: 1px solid transparent;
 }
+.unFilm img:hover{
+    filter: brightness(80%);
+}

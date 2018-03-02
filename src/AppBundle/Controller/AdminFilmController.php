@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Film;
 use AppBundle\Form\FilmType;
+use AppBundle\Form\ImportType;
 use AppBundle\Manager\FilmManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -84,7 +85,6 @@ class AdminFilmController extends Controller
             /** @var UploadedFile $file */
             $file = $film->getAffiche();
             $fileName = $this->generateUniqueFileName() . '.' . $file->guessExtension();
-            // moves the file to the directory where  brochures are stored
             $file->move(
                 $this->getParameter('affiches_directory'),
                 $fileName
@@ -115,6 +115,64 @@ class AdminFilmController extends Controller
      */
     public function deleteFilm(FilmManager $filmManager, $id)
     {
+        $film = $FilmManager->getFilm($id);
+        $this->generateUrl('admin_films_delete', [
+            'id' => $film->getId()
+        ]);
+        $FilmManager->deleteFilm($film);
+        return $this->redirectToRoute('admin_films');
+    }
+
+    /**
+     * @Route("/admin/films/import", name="import_films")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function importAction()
+    {
+        $films = [];
+        $row = 0;
+
+        if(($handle = fopen($this->getParameter('csv_directory') . "/import.csv", "r")) !== FALSE)
+        {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
+            {
+                $num = count($data);
+                $row++;
+                for ($c = 0; $c < $num; $c++) {
+                    $films[$row] = array(
+                        "category" => $data[0],
+                        "studio" => $data[1],
+                        "title" => $data[2],
+                        "year" => $data[3],
+                        "description" => $data[4],
+                        "age" => $data[5],
+                        "time" => $data[6],
+                        "affiche" => $data[7]
+                    );
+                }
+            }
+            fclose($handle);
+        }
+        $em = $this->getDoctrine()->getManager();
+        foreach ($films as $film )
+        {
+            $film = new Film();
+            $film
+                ->setCategory($film[0])
+                ->setStudio($film[1])
+                ->setTitle($film[2])
+                ->setYear($film[3])
+                ->setDescription($film[4])
+                ->setAge($film[5])
+                ->setTime($film[6])
+                ->setAffiche($film[7]);
+
+            $em->persist($film);
+
+        }
+        $em->flush();
+        return $this->redirectToRoute('admin_films');
+    }
         $film = $filmManager->getFilm($id);
         $this->generateUrl('admin_films_delete', ['id' => $film->getId()]);
         $filmManager->deleteFilm($film);

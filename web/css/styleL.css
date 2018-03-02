@@ -51,5 +51,6 @@ a:focus li .dropdown-menu a:hover li .dropdown-menu{
     background-color: #202020;
     border-top: none;
     border-left: none;
-    border-righ: none;
+    border-right: none;
+    border-bottom: none;
 }
