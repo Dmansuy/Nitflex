@@ -104,6 +104,4 @@ class AdminFilmController extends Controller
         $FilmManager->deleteFilm($film);
         return $this->redirectToRoute('admin_films');
     }
-
-
 }

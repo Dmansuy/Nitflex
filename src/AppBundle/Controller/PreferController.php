@@ -49,12 +49,23 @@ class PreferController extends Controller
         $this->generateUrl('prefer_list_add', ['id' => $film->getId()]);
         $user = $userInSession->addFilm($film);
         $userManager->createUser($user);
-        $this->redirect('films_list');
-        return $this->render('films/listPrefer.html.twig', [
-            'films' => $film,
-            'userInSession' => $userInSession,
-        ]);
+        return $this->redirectToRoute( 'films_list');
 
+    }
+
+    /**
+     * @Route("/film/prefer_list_delete/{id}", name="user_list_delete")
+     * @param UserManager $userManager
+     * @param FilmManager $filmManager
+     */
+    public function deleteList(UserManager $userManager,FilmManager $filmManager,$id)
+    {
+        $user = $this->getUser();
+        $film = $filmManager->getFilm($id);
+        $this->generateUrl( 'user_list_delete',['id' => $film->getId()]);
+        $user->removeFilm($film);
+        $userManager->deleteList($user);
+        return $this->redirectToRoute( 'prefer_list',['id' => $user->getId()]);
     }
 
 }

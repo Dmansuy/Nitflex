@@ -2,15 +2,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Ma liste</h1>
-
-    {%  if films == null %}
+    <h1 class="red">Ma liste</h1>
+<hr>
+<div class="conteneur-mas">
     {% for film in films %}
-        {{ dump(film) }}
+        <div class="Unfilm">
+            <div class="thumbnail">
+                <a href="{{ path('films_details', {'id' : film.id}) }}"><img width="300" height="450" src="{{asset('public/uploads/affiches/'~film.affiche)}}"></a>
+                <div class="caption">
+                    <div class="floatL70">
+                        <h3>{{ film.title }} </h3>
+                    </div>
+                    <div class="floatL30">
+                        <a class="btn-list" href="{{ path('user_list_delete',{'id' : film.id}) }}"><i class="far fa-plus-square"></i></a>
+                    </div>
+                    <br class="clearF">
+
+                </div>
+            </div>
+        </div>
     {% endfor %}
-    {% else %}
-     Vous n'avez pas de film dans votre liste
-   {% endif %}
+</div>
+
 {% endblock %}
 
 
