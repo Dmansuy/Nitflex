@@ -1,6 +1,6 @@
 {% extends 'admin/base.html.twig' %}
 {% block body %}
-<h1>Acteur</h1>
+<h1>{{ cast.firstName }} {% if cast.nickname %} "{{ cast.nickname }}" {% endif %}{{ cast.lastName }}</h1>
 
 
 {% endblock %}

@@ -17,10 +17,11 @@ class AdminStudioController extends Controller
      */
     public function indexStudio(StudioManager $StudioManager)
     {
-        $lesStudios = $StudioManager->getStudios();
+        $studios = $StudioManager->getStudios();
         $this->generateUrl('admin_studios');
         return $this->render('admin/studio/index.html.twig', [
-            'studios' => $lesStudios]);
+            'studios' => $studios
+        ]);
     }
 
     /**
@@ -31,7 +32,9 @@ class AdminStudioController extends Controller
     {
         $studio = $StudioManager->getStudio($id);
         $this->generateUrl('admin_studios_show', ['id' => $studio->getId()]);
-        return $this->render('admin/studios/show.html.twig', []);
+        return $this->render('admin/studio/show.html.twig', [
+            'studio' => $studio
+        ]);
     }
 
     /**
