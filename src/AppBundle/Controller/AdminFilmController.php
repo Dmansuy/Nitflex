@@ -38,7 +38,8 @@ class AdminFilmController extends Controller
         $film = $filmManager->getFilm($id);
         $this->generateUrl('admin_films_show', ['id' => $film->getId()]);
         return $this->render('admin/film/show.html.twig', [
-            'film' => $film]);
+            'film' => $film
+        ]);
     }
 
     /**
@@ -115,11 +116,11 @@ class AdminFilmController extends Controller
      */
     public function deleteFilm(FilmManager $filmManager, $id)
     {
-        $film = $FilmManager->getFilm($id);
+        $film = $filmManager->getFilm($id);
         $this->generateUrl('admin_films_delete', [
             'id' => $film->getId()
         ]);
-        $FilmManager->deleteFilm($film);
+        $filmManager->deleteFilm($film);
         return $this->redirectToRoute('admin_films');
     }
 
@@ -157,7 +158,7 @@ class AdminFilmController extends Controller
         {
             $film = new Film();
             $film
-                ->setCategory($film)
+                ->setCategory($film[0])
                 ->setStudio($film[1])
                 ->setTitle($film[2])
                 ->setYear($film[3])
@@ -169,13 +170,6 @@ class AdminFilmController extends Controller
             $em->persist($film);
         }
         $em->flush();
-        return $this->redirectToRoute('admin_films');
-    }
-    public function deleteFilm($id)
-    {
-        $film = $filmManager->getFilm($id);
-        $this->generateUrl('admin_films_delete', ['id' => $film->getId()]);
-        $filmManager->deleteFilm($film);
         return $this->redirectToRoute('admin_films');
     }
 }
