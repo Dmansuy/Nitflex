@@ -92,6 +92,17 @@ h3 {
     font-size: 24px;
 }
 
+
+.fa-minus-square {
+    color: #f40612;
+    margin: 10px 5px 10px 5px;
+    transition: all, 0.5s;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 24px;
+}
+
 .fa-plus-square:hover {
     color: #f40612;
 }

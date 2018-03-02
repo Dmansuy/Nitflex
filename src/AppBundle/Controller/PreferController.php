@@ -47,8 +47,8 @@ class PreferController extends Controller
         $userInSession = $this->getUser();
         $film = $filmManager->getFilm($id);
         $this->generateUrl('prefer_list_add', ['id' => $film->getId()]);
-        $user = $userInSession->addFilm($film);
-        $userManager->createUser($user);
+        $addFilm = $userInSession->addFilm($film);
+        $userManager->createUser($addFilm);
         return $this->redirectToRoute( 'films_list');
 
     }

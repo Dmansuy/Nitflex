@@ -33,11 +33,19 @@ class FilmController extends Controller
     public function indexAction(FilmManager $filmManager,CategoryManager $categoryManager, Request $request)
     {
         $films = $filmManager->getFilms();
+        $filmTitle =[];
         $userInSession = $this->getUser();
+        $listFilm = $userInSession->getFilms();
+
+        foreach ($listFilm as $film){
+
+            $filmTitle[]= $film->getTitle();
+        }
         $Categories = $categoryManager->getCategories();
         $this->generateUrl('films_list');
         return $this->render('films/listAll.html.twig', [
             'film' => $films,
+            'filmTitle' => $filmTitle,
             'categorie' => "",
             'listeCategories' => $Categories,
              'userInSession' => $userInSession

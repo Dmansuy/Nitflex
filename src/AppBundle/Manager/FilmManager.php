@@ -78,7 +78,11 @@ class FilmManager extends Controller
     }
 
     public function addFilm($film){
-        $this->em->persist($film);
+        $link =$film->getLink();
+        $tabLink = explode('=',$link);
+        $link = $tabLink[1];
+        $ObjFilm = $film->setLink($link);
+        $this->em->persist($ObjFilm);
         $this->em->flush();
         return $film;
     }
