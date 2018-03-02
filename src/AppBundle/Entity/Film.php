@@ -26,6 +26,12 @@ class Film
     private $title;
 
     /**
+     * @var string
+     * @ORM\Column(name="link", type="string", length=255)
+     */
+    private $link;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="year", type="datetime")
      */
@@ -96,7 +102,25 @@ class Film
         $this->title = $title;
         return $this;
     }
+    /**
+     * Get link
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
 
+    /**
+     * Set link
+     * @param string $link
+     * @return Film
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+        return $this;
+    }
     /**
      * Get title
      * @return string

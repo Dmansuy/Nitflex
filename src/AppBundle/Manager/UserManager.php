@@ -39,10 +39,20 @@ class UserManager extends Controller
         $this->em->flush();
         return $user;
     }
+  
     public function deleteUser($user)
     {
         $this->em->remove($user);
         $this->em->flush();
     }
 
+    public function deleteList($prefer){
+        $this->em->persist($prefer);
+        $this->em->flush();
+    }
+
+    public function getUnUser($id)
+    {
+        return $this->em->getRepository(User::class)->find($id);
+    }
 }

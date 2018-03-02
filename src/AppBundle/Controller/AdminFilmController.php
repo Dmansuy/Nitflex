@@ -16,41 +16,57 @@ class AdminFilmController extends Controller
 {
     /**
      * @Route("/admin/films", name="admin_films")
-     * @param  FilmManager $FilmManager
-     *
+     * @param  FilmManager $filmManager
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexFilm(FilmManager $FilmManager)
+    public function indexFilm(FilmManager $filmManager)
     {
-        $lesFilms = $FilmManager->getFilms();
+        $films = $filmManager->getFilms();
         $this->generateUrl('admin_films');
         return $this->render('admin/film/index.html.twig', [
-            'films' => $lesFilms]);
+            'films' => $films]);
     }
 
     /**
      * @Route("/admin/films/show/{id}", name="admin_films_show")
-     *
-     * @param FilmManager $FilmManager
+     * @param FilmManager $filmManager
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showFilm(FilmManager $FilmManager, $id)
+    public function showFilm(FilmManager $filmManager, $id)
     {
-        $Film = $FilmManager->getFilm($id);
-        $this->generateUrl('admin_films_show', ['id' => $Film->getId()]);
+        $film = $filmManager->getFilm($id);
+        $this->generateUrl('admin_films_show', ['id' => $film->getId()]);
         return $this->render('admin/film/show.html.twig', [
-            'film' => $Film]);
+            'film' => $film]);
     }
 
     /**
-     * @Route("/admin/films/edit", name="admin_films_edit")
+     * @Route("/admin/films/edit/{id}", name="admin_films_edit", requirements={"film" = "\d+"})
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-
-    public function editFilm(Request $request)
+    public function editFilm(Request $request, $id)
     {
-        $this->generateUrl('admin_films_edit');
-        return $this->render('admin/film/edit.html.twig', []);
+        $em = $this->getDoctrine()->getManager();
+        /** @var Film $film */
+        $film = $em->getRepository(Film::class)->find($id);
+        $film->setAffiche(null);
+        $form = $this->createForm(FilmType::class, $film);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $film = $form->getData();
+            $em->persist($film);
+            $em->flush();
+            return $this->redirectToRoute('admin_films');
+        }
+
+        $this->generateUrl('admin_films_edit', [
+            'id' => $film->getId()
+        ]);
+        return $this->render('admin/film/edit.html.twig', array('form' => $form->createView()));
     }
 
     /**
@@ -78,9 +94,9 @@ class AdminFilmController extends Controller
             return $this->redirectToRoute('admin_films');
         }
         $this->generateUrl('admin_films_new');
-        return $this->render('admin/film/new.html.twig', [
+        return $this->render('admin/film/new.html.twig', array(
             'form' => $form->createView()
-        ]);
+        ));
     }
 
     /**
@@ -92,12 +108,12 @@ class AdminFilmController extends Controller
     }
 
     /**
-     * @Route("/Admin/films/delete/{id}", name="admin_films_delete")
+     * @Route("/admin/films/delete/{id}", name="admin_films_delete")
      * @param FilmManager $CategoryFilm
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteCategory(FilmManager $FilmManager, $id)
+    public function deleteFilm(FilmManager $filmManager, $id)
     {
         $film = $FilmManager->getFilm($id);
         $this->generateUrl('admin_films_delete', [
@@ -155,6 +171,11 @@ class AdminFilmController extends Controller
 
         }
         $em->flush();
+        return $this->redirectToRoute('admin_films');
+    }
+        $film = $filmManager->getFilm($id);
+        $this->generateUrl('admin_films_delete', ['id' => $film->getId()]);
+        $filmManager->deleteFilm($film);
         return $this->redirectToRoute('admin_films');
     }
 }
