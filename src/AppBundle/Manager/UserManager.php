@@ -39,7 +39,7 @@ class UserManager extends Controller
         $this->em->flush();
         return $user;
     }
-  
+
     public function deleteUser($user)
     {
         $this->em->remove($user);

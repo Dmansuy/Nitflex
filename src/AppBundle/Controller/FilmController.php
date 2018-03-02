@@ -31,8 +31,8 @@ class FilmController extends Controller
     public function indexAction(FilmManager $filmManager,CategoryManager $categoryManager, Request $request)
     {
         $films = $filmManager->getFilms();
+        $categories = $categoryManager->getCategories();
         $userInSession = $this->getUser();
-        $Categories = $categoryManager->getCategories();
         $this->generateUrl('films_list');
         return $this->render('films/listAll.html.twig', [
             'film' => $films,
@@ -52,7 +52,7 @@ class FilmController extends Controller
     public function showDetailsAction(FilmManager $filmManager,CategoryManager $categoryManager, int $id)
     {
         $film = $filmManager->getFilm($id);
-        $Categories = $categoryManager->getCategories();
+        $categories = $categoryManager->getCategories();
         $userInSession = $this->getUser();
         $this->generateUrl('films_details', ['id' => $film->getId()]);
         return $this->render('films/details.html.twig', [

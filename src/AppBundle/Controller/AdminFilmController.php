@@ -131,7 +131,6 @@ class AdminFilmController extends Controller
     {
         $films = [];
         $row = 0;
-
         if(($handle = fopen($this->getParameter('csv_directory') . "/import.csv", "r")) !== FALSE)
         {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
@@ -158,7 +157,7 @@ class AdminFilmController extends Controller
         {
             $film = new Film();
             $film
-                ->setCategory($film[0])
+                ->setCategory($film)
                 ->setStudio($film[1])
                 ->setTitle($film[2])
                 ->setYear($film[3])
@@ -168,11 +167,12 @@ class AdminFilmController extends Controller
                 ->setAffiche($film[7]);
 
             $em->persist($film);
-
         }
         $em->flush();
         return $this->redirectToRoute('admin_films');
     }
+    public function deleteFilm($id)
+    {
         $film = $filmManager->getFilm($id);
         $this->generateUrl('admin_films_delete', ['id' => $film->getId()]);
         $filmManager->deleteFilm($film);
