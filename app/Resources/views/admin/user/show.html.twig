@@ -2,5 +2,6 @@
 {% block body %}
 <h1>{{ user.lastName }} {{ user.firstName }}</h1>
     <p><b>Date de naissance :</b> {{ user.birthday.date }}</p>
+    <p><b>Email :</b> {{ user.email }}</p>
     <p><b>Rôle :</b> {{ user.isAdmin }}</p>
 {% endblock %}

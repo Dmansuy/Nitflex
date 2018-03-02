@@ -83,11 +83,13 @@ class FilmController extends Controller
         $films = $filmManager->getFilmByCategory($id);
         $categories = $categoryManager->getCategories();
         $category = $categoryManager->getCategory($id);
+        $userInSession = $this->getUser();
         $this->generateUrl('la_categorie',['id' => $category->getId()]);
         return $this->render('films/listAll.html.twig', [
             'film' => $films,
             'categorie' => $category,
             'listCategories' => $categories,
+            'userInSession' => $userInSession
         ]);
     }
 

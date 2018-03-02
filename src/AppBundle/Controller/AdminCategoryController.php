@@ -34,7 +34,9 @@ class AdminCategoryController extends Controller
     {
         $category = $categoryManager->getCategory($id);
         $this->generateUrl('admin_categories_show', ['id' => $category->getId()]);
-        return $this->render('admin/category/show.html.twig', []);
+        return $this->render('admin/category/show.html.twig', [
+            'category'  => $category
+        ]);
     }
 
     /**

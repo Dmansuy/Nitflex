@@ -1,6 +1,11 @@
 {% extends 'admin/base.html.twig' %}
 {% block body %}
-<h1>Un Film</h1>
+    {{ dump() }}
+<h1>{{ film.title }}</h1>
+    <p><b>Durée :</b> {{ film.time }}</p>
+    <p><b>Année de sortie :</b> {{ film.year.date }}</p>
+    <p><b>Catégorie : </b> {{ film.category.nameCategory }}</p>
+    <p><b>Synopsis :</b> {{ film.description }}</p>
 
 
 {% endblock %}
