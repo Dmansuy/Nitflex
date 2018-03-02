@@ -18,6 +18,19 @@ class UserManager extends Controller
         $this->em = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
     }
+
+    /**
+     * @return array
+     */
+    public function getUsers()
+    {
+        return $this->em->getRepository(User::class)->findAll();
+    }
+
+    /**
+     * @param User $user
+     * @return User
+     */
     public function createUser(User $user)
     {
         $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
@@ -26,4 +39,10 @@ class UserManager extends Controller
         $this->em->flush();
         return $user;
     }
+    public function deleteUser($user)
+    {
+        $this->em->remove($user);
+        $this->em->flush();
+    }
+
 }

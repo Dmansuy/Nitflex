@@ -3,11 +3,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\UserEditType;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Manager\UserManager;
+
 
 class AdminUserController extends Controller
 {
@@ -18,10 +20,10 @@ class AdminUserController extends Controller
      */
     public function indexUser(UserManager $UserManager)
     {
-        $lesUsers = $UserManager->getLesUsers();
+        $users = $UserManager->getUsers();
         $this->generateUrl( 'admin_users');
         return $this->render('admin/user/index.html.twig', [
-            'users' => $lesUsers ]);
+            'users' => $users ]);
     }
     /**
      * @Route("/admin/users/show/{id}", name="admin_users_show")
@@ -29,22 +31,40 @@ class AdminUserController extends Controller
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showUser(UserManager $UserManager,$id)
+    public function showUser(UserManager $UserManager, $id)
     {
-        $user = $UserManager->getUnUser($id);
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
         $this->generateUrl( 'admin_users_show',['id' => $user->getId()]);
-        return $this->render('admin/user/show.html.twig', [ ]);
+        return $this->render('admin/user/show.html.twig', [
+            'id' => $id,
+            'user' => $user
+        ]);
     }
 
     /**
-     * @Route("/admin/users/edit", name="admin_users_edit")
+     * @Route("/admin/users/edit/{id}", name="admin_users_edit")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editUser(Request $request)
+    public function editUser(Request $request, $id)
     {
-        $this->generateUrl( 'admin_users_edit');
-        return $this->render('admin/user/edit.html.twig', [ ]);
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+        $form = $this->createForm(UserEditType::class, $user );
+        $form->handleRequest( $request );
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist( $category );
+            $em->flush();
+            return $this->redirectToRoute( 'admin_users');
+        }
+        $this->generateUrl( 'admin_users_edit', [
+            'id' => $user->getId()
+        ]);
+        return $this->render('admin/user/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -77,7 +97,8 @@ class AdminUserController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteUser (UserManager $UserManager, $id){
-        $user = $UserManager->getUnUser($id);
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
         $this->generateUrl( 'admin_users_delete',['id' => $user->getId()]);
         $UserManager->deleteUser($user);
         return $this->redirectToRoute( 'admin_users');
