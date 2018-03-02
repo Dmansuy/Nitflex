@@ -49,7 +49,9 @@ class AdminFilmController extends Controller
     public function editFilm(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
+        /** @var Film $film */
         $film = $em->getRepository(Film::class)->find($id);
+        $film->setAffiche(null);
         $form = $this->createForm(FilmType::class, $film);
         $form->handleRequest($request);
 
@@ -63,7 +65,7 @@ class AdminFilmController extends Controller
         $this->generateUrl('admin_films_edit', [
             'id' => $film->getId()
         ]);
-        return $this->render('admin/film/edit.html.twig', ['form' => $form->createView()]);
+        return $this->render('admin/film/edit.html.twig', array('form' => $form->createView()));
     }
 
     /**
@@ -92,9 +94,9 @@ class AdminFilmController extends Controller
             return $this->redirectToRoute('admin_films');
         }
         $this->generateUrl('admin_films_new');
-        return $this->render('admin/film/new.html.twig', [
+        return $this->render('admin/film/new.html.twig', array(
             'form' => $form->createView()
-        ]);
+        ));
     }
 
     /**
