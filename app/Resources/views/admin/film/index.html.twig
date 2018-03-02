@@ -1,32 +1,32 @@
 {% extends 'admin/base.html.twig' %}
 {% block body %}
-<h1>Films</h1>
-<a href="{{ path('admin_films_new')}}" class="btn btn-primary">Nouveau film</a>
-<div class="block-admin">
+    <h1>Films</h1>
+    <a href="{{ path('admin_films_new') }}" class="btn btn-primary">Nouveau film</a>
+    <div class="block-admin">
         <table class="table table-condensed">
             <thead>
-                <th>Titre</th>
-                <th>Année</th>
-                <th>Descriptif</th>
-                <th>Catégorie</th>
-                <th colspan="2"></th>
+            <th>Titre</th>
+            <th>Année</th>
+            <th>Descriptif</th>
+            <th>Catégorie</th>
+            <th colspan="2"></th>
             </thead>
             <tbody>
-             {% for film in films %}
+            {% for film in films %}
             <tr>
                 <td height="75">
                     <a href="{{ path('admin_films_show',{'id': film.id}) }}">
-                    {{ film.title }}
+                        {{ film.title }}
                     </a>
                 </td>
                 <td>{{ film.year.date }}</td>
                 <td>{{ film.category.nameCategory }}</td>
                 <td>{{ film.description }}</td>
-                <td><a href="{{ path('admin_films_edit')}}"><i class="fas fa-edit"></i></a></td>
+                <td><a href="{{ path('admin_films_edit', {'id': film.id}) }}"><i class="fas fa-edit"></i></a></td>
                 <td><a href="{{ path('admin_films_delete',{'id': film.id}) }}"><i class="fas fa-trash-alt"></i></a></td>
             </tr>
             </tbody>
             {% endfor %}
         </table>
-</div>
+    </div>
 {% endblock %}

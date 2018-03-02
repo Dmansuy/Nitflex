@@ -4,16 +4,15 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Studio;
 use AppBundle\Form\StudioType;
+use AppBundle\Manager\StudioManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Manager\StudioManager;
-use AppBundle\Entity\Category;
 
 class AdminStudioController extends Controller
 {
     /**
-     * @Route("/Admin/studios", name="admin_studios")
+     * @Route("/admin/studios", name="admin_studios")
      * @param  StudioManager $StudioManager
      */
     public function indexStudio(StudioManager $StudioManager)
@@ -25,30 +24,46 @@ class AdminStudioController extends Controller
     }
 
     /**
-     * @Route("/Admin/studios/show/{id}", name="admin_studios_show")
+     * @Route("/admin/studios/show/{id}", name="admin_studios_show")
      * @param  StudioManager $StudioManager
      */
     public function showStudio(StudioManager $StudioManager, $id)
     {
         $studio = $StudioManager->getStudio($id);
         $this->generateUrl('admin_studios_show', ['id' => $studio->getId()]);
-        return $this->render('admin/studio/show.html.twig', []);
+        return $this->render('admin/studios/show.html.twig', []);
     }
 
     /**
-     * @Route("/Admin/studios/edit", name="admin_studios_edit")
+     * @Route("/admin/studios/edit/{id}", name="admin_studios_edit", requirements={"studio" = "\d+"})
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-
-    public function editStudio(Request $request)
+    public function editStudio(Request $request, $id)
     {
-        $this->generateUrl('admin_studios_edit');
-        return $this->render('admin/studio/edit.html.twig', []);
+        $em = $this->getDoctrine()->getManager();
+        $studio = $em->getRepository(Studio::class)->find($id);
+        $form = $this->createForm(StudioType::class, $studio);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $studio = $form->getData();
+            $em->persist($studio);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_studios');
+        }
+
+        $this->generateUrl('admin_studios_edit', [
+            'id' => $studio->getId()
+        ]);
+        return $this->render('admin/studio/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**
-     * @Route("/Admin/studios/new", name="admin_studios_new")
+     * @Route("/admin/studios/new", name="admin_studios_new")
      */
-
     public function newStudio(Request $request, StudioManager $studioManager)
     {
         $studio = new Studio();
@@ -60,12 +75,12 @@ class AdminStudioController extends Controller
             return $this->redirectToRoute('admin_studios');
         }
         $this->generateUrl('admin_studios_new');
-        return $this->render('admin/studio/new.html.twig', ['form' =>
+        return $this->render('admin/studios/new.html.twig', ['form' =>
             $form->createView()]);
     }
 
     /**
-     * @Route("/Admin/studios/delete/{id}", name="admin_studios_delete")
+     * @Route("/admin/studios/delete/{id}", name="admin_studios_delete")
      * @param  StudioManager $StudioManager
      */
     public function deleteCategory(StudioManager $StudioManager, $id)
