@@ -37,7 +37,7 @@ class FilmController extends Controller
         return $this->render('films/listAll.html.twig', [
             'film' => $films,
             'categorie' => "",
-            'listCategories' => $categories
+            'listCategories' => $categories,
              'userInSession' => $userInSession
         ]);
     }
