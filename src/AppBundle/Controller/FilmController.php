@@ -21,6 +21,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FilmController extends Controller
 {
+
+
     /**
      * @Route("/films", name="films_list")
      *
@@ -28,15 +30,17 @@ class FilmController extends Controller
      * @param CategoryManager $categoryManager
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(FilmManager $filmManager,CategoryManager $categoryManager)
+    public function indexAction(FilmManager $filmManager,CategoryManager $categoryManager, Request $request)
     {
         $films = $filmManager->getFilms();
+        $userInSession = $this->getUser();
         $Categories = $categoryManager->getCategories();
         $this->generateUrl('films_list');
         return $this->render('films/listAll.html.twig', [
             'film' => $films,
             'categorie' => "",
-            'listeCategories' => $Categories
+            'listeCategories' => $Categories,
+             'userInSession' => $userInSession
         ]);
     }
 
@@ -51,11 +55,13 @@ class FilmController extends Controller
     {
         $film = $filmManager->getFilm($id);
         $Categories = $categoryManager->getCategories();
+        $userInSession = $this->getUser();
         $this->generateUrl('films_details', ['id' => $film->getId()]);
         return $this->render('films/details.html.twig', [
             'listeCategories' => $Categories,
             'categorie' => "",
-            'film' => $film
+            'film' => $film,
+            'userInSession' => $userInSession
         ]);
     }
 

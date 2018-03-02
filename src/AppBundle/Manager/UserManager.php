@@ -26,4 +26,11 @@ class UserManager extends Controller
         $this->em->flush();
         return $user;
     }
+
+    public function getUnUser($id)
+    {
+        return $this->em->getRepository(User::class)->find($id);
+    }
+
+
 }

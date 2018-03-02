@@ -22,3 +22,4 @@ security:
                 target: login
     access_control:
         - { path: ^/films, roles: "ROLE_USER" }
+        - { path: ^/admin, roles: "ROLE_ADMIN" }

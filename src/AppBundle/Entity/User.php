@@ -184,10 +184,7 @@ class User implements UserInterface
         $roles = ['ROLE_USER'];
         if($this->isAdmin())
         {
-            $roles[] = [
-                'ROLE_ADMIN',
-                'ROLE_USER'
-            ];
+            $roles[] = 'ROLE_ADMIN';
         }
         return $roles;
     }
