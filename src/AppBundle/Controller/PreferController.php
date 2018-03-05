@@ -32,7 +32,7 @@ class PreferController extends Controller
         $Categories = $categoryManager->getCategories();
         return $this->render('films/listPrefer.html.twig', [
             'films' => $film,
-            'listeCategories' => $Categories,
+            'listCategories' => $Categories,
             'userInSession' => $userInSession,
         ]);
     }
