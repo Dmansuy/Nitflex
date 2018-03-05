@@ -31,7 +31,8 @@ class FilmType extends AbstractType
             ->add('Age', TextType::class)
             ->add('time', TextType::class)
             ->add('year', DateTimeType::class)
-            ->add('affiche', FileType::class);
+            ->add('affiche', FileType::class)
+            ->add('link', TextType::class);
 
         $builder->add('category', EntityType::class, ['class' => Category::class, 'choice_label' => 'nameCategory']);
         $builder->add('studio', EntityType::class, ['class' => Studio::class, 'choice_label' => 'name']);
