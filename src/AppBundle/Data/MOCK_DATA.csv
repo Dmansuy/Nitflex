@@ -1,0 +1,4 @@
+firstName, lastName, email, password, birthday, isAdmin, categoryName,cast_firstName, cast_lastName, cast_nickName, studio, film_name, film_link, film_year, film_desc,film_age, film_time,film_affiche
+florian, ipssi, florian@ipssi.com, pass_florian, 1996-03-01, 0, Action, Lola,Big,Nini, Holy, Magic, lolo, 2014-02-02, whoua,12,3:20,222.png
+Diane, ipssi, diane@ipssi.com, pass_diane, 1975-02-02, 0, Drama, Baba,One,Toto, Hola, Hody, lolo,2014-02-02,whoua,12,2:20,222.png
+Louis, ipssi, louis@ipssi.com, pass_louis, 1980-05-06, 0, Romance,Mama,Three,Tata, Holon, Loin, Loloo, 2014-02-02,whoua,12,2:20,222.png
