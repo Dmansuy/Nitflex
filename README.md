@@ -32,7 +32,7 @@ L'application dispose également d'une interface admin avec les fonctionnalités
  
 Les utilisateurs de l'interface admin peuvent avoir des rôles différents et n'accèdent pas à toutes les fonctionnalités, ex :
 
--ROLE_MARKET (Gestion des utilisateurs / Gestion des abonnements utilisateurs)
--<b>ROLE_ADMIN</b> (Toutes les fonctionnalités)
+-ROLE_MARKET (Gestion des utilisateurs / Gestion des abonnements utilisateurs)   
+-<b>ROLE_ADMIN</b> (Toutes les fonctionnalités)   
  
 Les éléments en gras composent la trame principale à développer dans votre projet. Votre projet devra contenir l'intégralité des éléments vue en cours (gestion des entités, formulaires, services, fixtures, commandes, etc...). Vous devrez également tenir compte des Bonnes Pratiques de Symfony ainsi que la norme PSR-2. Libre à vous d'ajouter autant de fonctionnalités que vous voulez, le but est de vous faire manipuler le framework Symfony. La partie design ne sera pas noté, cependant elle pourra ajouter des points bonus.
