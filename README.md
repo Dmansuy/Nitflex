@@ -1,77 +1,38 @@
-Symfony Standard Edition
+Formation Symfony
 ========================
 
-**WARNING**: This distribution does not support Symfony 4. See the
-[Installing & Setting up the Symfony Framework][15] page to find a replacement
-that fits you best.
+Version 3.4 & 4.0  
+IPSSI - Février 2018
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+### Projet Nitflex
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Netflix est une application web permettant la visualisation en streaming de films ou séries. Cette application propose des fonctionnalités suivantes :  
 
-What's inside?
---------------
+* <b>Inscription / Connexion utilisateur (ROLE_USER)</b>  
+* <b>Faire une recherche d'un film</b>  
+* <b>Lister les films</b> ou séries <b>par catégories</b>   
+* Lister les ajouts récents  
+* <b>Afficher le détail du film / série</b>    
+* <b>Regarder un film / épisode de série</b>    
+* <b>Passer à l'épisode suivant</b>    
+* <b>Modifier les paramètres / préférences utilisateur</b>    
+* Ajouter un pouce sur un film qui vous a plu (ou non)  
+* <b>Ajouter / supprimer un film de la liste "à regarder plus tard"</b>  
 
-The Symfony Standard Edition is configured with the following defaults:
+L'application dispose également d'une interface admin avec les fonctionnalités suivantes :
+*<b> CRUD catégorie de film</b>     
+*<b> CRUD film</b>     
+* CRUD série   
+* CRUD saison de la série  
+* CRUD épisode de la saison   
+* Mettre une liste de film en avant  
+* Gestion des utilisateurs (ajout / suppression / bannissement)    
+* Gestion des abonnements utilisateurs    
+* Import massif de film / série   
+ 
+Les utilisateurs de l'interface admin peuvent avoir des rôles différents et n'accèdent pas à toutes les fonctionnalités, ex :
 
-  * An AppBundle you can use to start coding;
-
-  * Twig as the only configured template engine;
-
-  * Doctrine ORM/DBAL;
-
-  * Swiftmailer;
-
-  * Annotations enabled for everything.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev env) - Adds code generation
-    capabilities
-
-  * [**WebServerBundle**][14] (in dev env) - Adds commands for running applications
-    using the PHP built-in web server
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.4/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.4/doctrine.html
-[8]:  https://symfony.com/doc/3.4/templating.html
-[9]:  https://symfony.com/doc/3.4/security.html
-[10]: https://symfony.com/doc/3.4/email.html
-[11]: https://symfony.com/doc/3.4/logging.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
-[14]: https://symfony.com/doc/current/setup/built_in_web_server.html
-[15]: https://symfony.com/doc/current/setup.html
+-ROLE_MARKET (Gestion des utilisateurs / Gestion des abonnements utilisateurs)
+-<b>ROLE_ADMIN</b> (Toutes les fonctionnalités)
+ 
+Les éléments en gras composent la trame principale à développer dans votre projet. Votre projet devra contenir l'intégralité des éléments vue en cours (gestion des entités, formulaires, services, fixtures, commandes, etc...). Vous devrez également tenir compte des Bonnes Pratiques de Symfony ainsi que la norme PSR-2. Libre à vous d'ajouter autant de fonctionnalités que vous voulez, le but est de vous faire manipuler le framework Symfony. La partie design ne sera pas noté, cependant elle pourra ajouter des points bonus.
